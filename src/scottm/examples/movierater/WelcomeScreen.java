@@ -24,6 +24,7 @@ public class WelcomeScreen extends Activity {
 	private EditText tag1;
 	private EditText tag2;
 //comment
+//comment2
 	// called when the Activity is first started
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
