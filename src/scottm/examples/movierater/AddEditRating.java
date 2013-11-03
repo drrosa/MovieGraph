@@ -31,12 +31,12 @@ public class AddEditRating extends Activity {
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.add_rating);
 
-		title = (EditText) findViewById(R.id.titleEditText);
-		rating = (RatingBar) findViewById(R.id.editRating);
-		dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
-		genre = (EditText) findViewById(R.id.genreEditText);
-		tag1 = (EditText) findViewById(R.id.tag1EditText);
-		tag2 = (EditText) findViewById(R.id.tag2EditText);
+//		title = (EditText) findViewById(R.id.titleEditText);
+//		rating = (RatingBar) findViewById(R.id.editRating);
+//		dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
+//		genre = (EditText) findViewById(R.id.genreEditText);
+		tag1 = (EditText) findViewById(R.id.username);
+		tag2 = (EditText) findViewById(R.id.password);
 
 		Bundle extras = getIntent().getExtras();
 
@@ -54,9 +54,9 @@ public class AddEditRating extends Activity {
 		} // end if
 
 		// set event listener for the Save Rating Button
-		Button saveRatingButton = 
-				(Button) findViewById(R.id.saveRatingButton);
-		saveRatingButton.setOnClickListener(saveRatingButtonClicked);
+//		Button saveRatingButton = 
+//				(Button) findViewById(R.id.saveRatingButton);
+//		saveRatingButton.setOnClickListener(saveRatingButtonClicked);
 	} 
 
 	// responds to event generated when user clicks the Done Button

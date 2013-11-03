@@ -9,6 +9,8 @@
     <string name="label_date_seen">Date Seen</string>
     <string name="label_tag1">TAG 1</string>
     <string name="label_tag2">TAG 2</string>
+        <string name="user">Username</string>
+    <string name="password">Password</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_delete">Delete</string>
     <string name="button_add_rating">Add Rating</string>
@@ -23,5 +25,7 @@
     <string name="errorMessage">You must enter a movie name</string>
     <string name="title">Title</string>
     <string name="save_rating_button">Save Rating</string>
+    <string name="login">Login</string>
+    <string name="todo">TODO</string>
 
 </resources>
