@@ -31,10 +31,10 @@ public class SignupScreen extends Activity {
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.signup);
 
-//		title = (EditText) findViewById(R.id.titleEditText);
+		title = (EditText) findViewById(R.id.titleEditText);
 //		rating = (RatingBar) findViewById(R.id.editRating);
-//		dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
-//		genre = (EditText) findViewById(R.id.genreEditText);
+		dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
+		genre = (EditText) findViewById(R.id.genreEditText);
 		tag1 = (EditText) findViewById(R.id.username);
 		tag2 = (EditText) findViewById(R.id.password);
 
@@ -44,9 +44,9 @@ public class SignupScreen extends Activity {
 		if (extras != null) {
 			rowID = extras.getLong("row_id");
 			title.setText(extras.getString("name"));  
-			rating.setRating(extras.getFloat("rating"));
+//			rating.setRating(extras.getFloat("rating"));
 			Log.d(TAG, "rating from field:" + extras.getFloat("rating"));
-			Log.d(TAG, "rating in UI component: " + rating.getRating());
+//			Log.d(TAG, "rating in UI component: " + rating.getRating());
 			dateSeen.setText(extras.getString("dateSeen"));  
 			genre.setText(extras.getString("genre"));  
 			tag1.setText(extras.getString("tag1"));  
@@ -103,13 +103,13 @@ public class SignupScreen extends Activity {
 		DatabaseConnector databaseConnector = new DatabaseConnector(this);
 		
 		
-		Log.d(TAG, "rating inserted into DB: " + (rating.getRating() * 2));
+//		Log.d(TAG, "rating inserted into DB: " + (rating.getRating() * 2));
 
 		if (getIntent().getExtras() == null) {
 			// insert the rating information into the database
 			databaseConnector.insertRating(
 					title.getText().toString(),
-					(int) (rating.getRating() * 2),
+					2,
 					genre.getText().toString(), 
 					dateSeen.getText().toString(), 
 					tag1.getText().toString(),
@@ -118,7 +118,7 @@ public class SignupScreen extends Activity {
 		else {
 			databaseConnector.updateRating(rowID,
 					title.getText().toString(),
-					(int) (rating.getRating() * 2),
+					2,
 					genre.getText().toString(), 
 					dateSeen.getText().toString(), 
 					tag1.getText().toString(),

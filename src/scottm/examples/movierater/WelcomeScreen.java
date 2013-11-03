@@ -71,7 +71,7 @@ public class WelcomeScreen extends Activity {
 	}
 	public void onLoginclick(View view){
 
-		Intent intent = new Intent(this, MovieRaterActivity.class);
+		Intent intent = new Intent(this, MainMenu.class);
 		startActivity(intent);
 //		 Do something in response to button
 

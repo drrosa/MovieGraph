@@ -2,14 +2,14 @@
 <resources>
 
     <string name="hello">Hello World, MovieRaterActivity!</string>
-    <string name="app_name">MovieRater</string>
+    <string name="app_name">MovieGraph</string>
     <string name="label_name">Title</string>
     <string name="label_rating">Rating</string>
     <string name="label_genre">Genre</string>
     <string name="label_date_seen">Date Seen</string>
     <string name="label_tag1">TAG 1</string>
     <string name="label_tag2">TAG 2</string>
-        <string name="user">Username</string>
+    <string name="user">Username</string>
     <string name="password">Password</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_delete">Delete</string>
@@ -27,5 +27,9 @@
     <string name="save_rating_button">Save Rating</string>
     <string name="login">Login</string>
     <string name="todo">TODO</string>
+    
+    
+    <color name="DodgerBlue">#1E90FF</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>
