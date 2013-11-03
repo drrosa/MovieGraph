@@ -1,7 +1,9 @@
 package scottm.examples.movierater;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,9 +14,9 @@ import android.widget.RatingBar;
 
 
 public class WelcomeScreen extends Activity {
-    
-    private static final String TAG = "welcome";
-    
+
+	private static final String TAG = "welcome";
+
 	private long rowID; 
 
 	private EditText title;
@@ -23,18 +25,18 @@ public class WelcomeScreen extends Activity {
 	private EditText dateSeen;
 	private EditText tag1;
 	private EditText tag2;
-//comment
-//comment2
+	//comment
+	//comment2
 	// called when the Activity is first started
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.add_rating);
+		setContentView(R.layout.welcome_screen);
 
-//		title = (EditText) findViewById(R.id.titleEditText);
-//		rating = (RatingBar) findViewById(R.id.editRating);
-//		dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
-//		genre = (EditText) findViewById(R.id.genreEditText);
+		//		title = (EditText) findViewById(R.id.titleEditText);
+		//		rating = (RatingBar) findViewById(R.id.editRating);
+		//		dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
+		//		genre = (EditText) findViewById(R.id.genreEditText);
 		tag1 = (EditText) findViewById(R.id.username);
 		tag2 = (EditText) findViewById(R.id.password);
 
@@ -54,10 +56,26 @@ public class WelcomeScreen extends Activity {
 		} // end if
 
 		// set event listener for the Save Rating Button
-//		Button saveRatingButton = 
-//				(Button) findViewById(R.id.saveRatingButton);
-//		saveRatingButton.setOnClickListener(saveRatingButtonClicked);
+		//		Button saveRatingButton = 
+		//				(Button) findViewById(R.id.saveRatingButton);
+		//		saveRatingButton.setOnClickListener(saveRatingButtonClicked);
 	} 
+
+
+	public void onSubmitclick(View view){
+
+		Intent intent = new Intent(this, SignupScreen.class);
+		startActivity(intent);
+//		 Do something in response to button
+
+	}
+	public void onLoginclick(View view){
+
+		Intent intent = new Intent(this, MovieRaterActivity.class);
+		startActivity(intent);
+//		 Do something in response to button
+
+	}
 
 	// responds to event generated when user clicks the Done Button
 	OnClickListener saveRatingButtonClicked = new OnClickListener() { 
@@ -86,7 +104,7 @@ public class WelcomeScreen extends Activity {
 			else {
 				// create a new AlertDialog Builder
 				AlertDialog.Builder builder = 
-				new AlertDialog.Builder(WelcomeScreen.this);
+						new AlertDialog.Builder(WelcomeScreen.this);
 
 				// set dialog title & message, and provide Button to dismiss
 				builder.setTitle(R.string.errorTitle); 
@@ -101,8 +119,8 @@ public class WelcomeScreen extends Activity {
 	private void saveRating() {
 		// get DatabaseConnector to interact with the SQLite database
 		DatabaseConnector databaseConnector = new DatabaseConnector(this);
-		
-		
+
+
 		Log.d(TAG, "rating inserted into DB: " + (rating.getRating() * 2));
 
 		if (getIntent().getExtras() == null) {

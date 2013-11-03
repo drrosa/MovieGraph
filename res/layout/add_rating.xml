@@ -44,18 +44,15 @@
             >
         </EditText>
 
-        
-
         <Button
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/password"
             android:layout_marginTop="15dp"
             android:layout_weight="2.53"
             android:text="@string/login"
-            android:textSize="30sp" 
-            android:layout_below= "@id/password"
-            />
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/signup"
