@@ -13,7 +13,8 @@ import android.widget.RatingBar;
 
 
 public class welcome extends Activity {
-    
+
+    //testing git
     private static final String TAG = "welcome";
     
 	private long rowID; 
