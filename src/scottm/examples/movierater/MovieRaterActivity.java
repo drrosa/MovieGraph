@@ -104,7 +104,7 @@ public class MovieRaterActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// create a new Intent to launch
 		Intent addNewContact = 
-				new Intent(this, AddEditRating.class);
+				new Intent(this, RecommendMovie.class);
 		startActivity(addNewContact); 
 		return super.onOptionsItemSelected(item); 
 	}

@@ -23,21 +23,19 @@ public class MainMenu extends Activity {
 
     public void onRecommendClick(View view){
 
-        Intent intent = new Intent(this, RecommendScreen.class);
+        Intent intent = new Intent(this, RecommendMovie.class);
         startActivity(intent);
 //		 Do something in response to button
 
     }
 
-	// responds to event generated when user clicks the Done Button
-	OnClickListener saveRatingButtonClicked = new OnClickListener() { 
-		@Override
-		public void onClick(View v) {
-			
-		} 
-	}; 
+    public void onPendingClick(View view){
 
+        Intent intent = new Intent(this, MovieRaterActivity.class);
+        startActivity(intent);
+//		 Do something in response to button
 
- 
+    }
+
 } 
 

@@ -120,18 +120,17 @@ public class ViewRating extends Activity {
 		switch (item.getItemId()) {
 		case R.id.editItem:
 			// create an Intent to launch the AddEditRating Activity
-			Intent addEditRating =
-			    new Intent(this, AddEditRating.class);
+			Intent recommendMovie =
+			    new Intent(this, RecommendMovie.class);
 
 			// pass the selected rating's data as extras with the Intent
-			addEditRating.putExtra(MovieRaterActivity.ROW_ID, rowID);
-			addEditRating.putExtra("name", name.getText());
-			addEditRating.putExtra("rating", rating.getRating());
-			addEditRating.putExtra("genre", genre.getText());
-			addEditRating.putExtra("dateSeen", dateSeen.getText());
-			addEditRating.putExtra("tag1", tag1.getText());
-			addEditRating.putExtra("tag2", tag2.getText());
-			startActivity(addEditRating); 
+			recommendMovie.putExtra(MovieRaterActivity.ROW_ID, rowID);
+			recommendMovie.putExtra("name", name.getText());
+			recommendMovie.putExtra("genre", genre.getText());
+			recommendMovie.putExtra("dateSeen", dateSeen.getText());
+			recommendMovie.putExtra("tag1", tag1.getText());
+			recommendMovie.putExtra("tag2", tag2.getText());
+			startActivity(recommendMovie);
 			return true;
 
 		case R.id.deleteItem:

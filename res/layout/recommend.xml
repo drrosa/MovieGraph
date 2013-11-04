@@ -57,12 +57,12 @@
         </EditText>
 
         <Button
-            android:id="@+id/saveRatingButton"
+            android:id="@+id/submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:text="Submit"
+            android:text="@string/button_submit"
             android:textSize="30sp" >
         </Button>
     </LinearLayout>

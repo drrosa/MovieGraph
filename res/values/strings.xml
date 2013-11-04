@@ -17,7 +17,7 @@
     <string name="button_signup">Sign Up</string>
     <string name="button_accept">Accept</string>
     <string name="button_delete">Delete</string>
-    <string name="button_add_rating">Add Rating</string>
+    <string name="button_submit">Submit</string>
     <string name="button_save_rating">Save Rating</string>
     <string name="menuitem_add_rating">Add Rating</string>
     <string name="menuitem_edit_rating">Edit Rating</string>

@@ -37,12 +37,11 @@ public class DatabaseConnector {
 
 
     // inserts a new rating into the database
-    public void insertRating(String title, int rating, 
+    public void insertRating(String title,
             String genre, String dateSeen, String tag1, String tag2) {
 
         ContentValues newRating = new ContentValues();
         newRating.put("name", title);
-        newRating.put("rating", rating);
         newRating.put("genre", genre);
         newRating.put("dateSeen", dateSeen);
         newRating.put("tag1", tag1);
@@ -55,12 +54,11 @@ public class DatabaseConnector {
 
 
     // updates a rating in the database
-    public void updateRating(long id, String name, int rating, 
+    public void updateRating(long id, String name,
             String genre, String dateSeen, String tag1, String tag2) {
 
         ContentValues editRating = new ContentValues();
         editRating.put("name", name);
-        editRating.put("rating", rating);
         editRating.put("genre", genre);
         editRating.put("dateSeen", dateSeen);
         editRating.put("tag1", tag1);
@@ -120,8 +118,7 @@ public class DatabaseConnector {
                     "genre TEXT, " +
                     "dateSeen TEXT, " +
                     "tag1 TEXT, " +
-                    "tag2 TEXT, " +
-                    "rating INTEGER);";
+                    "tag2 TEXT, ";
 
             db.execSQL(createQuery);
         }
