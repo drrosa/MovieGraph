@@ -24,6 +24,12 @@
     <string name="errorButton">OK</string>
     <string name="errorTitle">Movie Name is Required</string>
     <string name="errorMessage">You must enter a movie name</string>
+
+
+    <string name="errorEmail">Email is Required</string>
+    <string name="errorMessage_email">You must enter a valid email</string>
+
+
     <string name="title">Title</string>
     <string name="save_rating_button">Save Rating</string>
     <string name="login">Login</string>
