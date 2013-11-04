@@ -13,6 +13,9 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="button_cancel">Cancel</string>
+    <string name="button_login">Login</string>
+    <string name="button_signup">Sign Up</string>
+    <string name="button_accept">Accept</string>
     <string name="button_delete">Delete</string>
     <string name="button_add_rating">Add Rating</string>
     <string name="button_save_rating">Save Rating</string>
@@ -26,13 +29,8 @@
     <string name="errorMessage">You must enter a movie name</string>
     <string name="title">Title</string>
     <string name="save_rating_button">Save Rating</string>
-    <string name="login">Login</string>
-    <string name="accept">Accept</string>
-    <string name="cancel">Cancel</string>
     <string name="new_email">New e-mail</string>
     <string name="todo">TODO</string>
-    
-    
     <color name="DodgerBlue">#1E90FF</color>
     <color name="white">#FFFFFF</color>
 

@@ -53,7 +53,7 @@
             android:layout_below="@id/confirm_password"
             android:layout_marginTop="15dp"
             android:layout_weight="2.53"
-            android:text="@string/accept"
+            android:text="@string/button_accept"
             android:onClick="onAcceptClick"
             android:textSize="30sp" />
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_weight="2.53"
-            android:text="@string/cancel"
+            android:text="@string/button_cancel"
             android:textSize="30sp"
             android:layout_toRightOf="@id/accept"
             android:onClick="onCancelClick"
