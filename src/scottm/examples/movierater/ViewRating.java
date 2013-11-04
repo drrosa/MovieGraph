@@ -18,7 +18,6 @@ public class ViewRating extends Activity {
 
 	private long rowID; 
 	private TextView name; 
-	private RatingBar rating; 
 	private TextView genre;
 	private TextView dateSeen; 
 	private TextView tag1;
@@ -31,7 +30,6 @@ public class ViewRating extends Activity {
 		setContentView(R.layout.rating_view);
 
 		name = (TextView) findViewById(R.id.nameTextView);
-		rating = (RatingBar) findViewById(R.id.rating);
 		genre = (TextView) findViewById(R.id.genreTextView);
 		dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
 		tag1 = (TextView) findViewById(R.id.tag1TextView);
@@ -88,11 +86,6 @@ public class ViewRating extends Activity {
 
 			// fill TextViews with the retrieved data
 			name.setText(result.getString(nameIndex));
-			rating.setRating(result.getInt(ratingIndex)  * rating.getStepSize());
-			Log.d("ViewRating", "rating from table: " + result.getInt(ratingIndex));
-			Log.d("View", "rating in UI component: " + rating.getRating());
-			Log.d("View", "max rating in UI component: " + rating.getMax());
-			Log.d("View", "step size in UI component: " + rating.getStepSize());
 			genre.setText(result.getString(genreIndex));
 			dateSeen.setText(result.getString(dateSeenIndex));
 			tag1.setText(result.getString(tag1Index));
