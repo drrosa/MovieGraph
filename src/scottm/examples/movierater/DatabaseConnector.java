@@ -118,7 +118,7 @@ public class DatabaseConnector {
                     "genre TEXT, " +
                     "dateSeen TEXT, " +
                     "tag1 TEXT, " +
-                    "tag2 TEXT, ";
+                    "tag2 TEXT)";
 
             db.execSQL(createQuery);
         }
