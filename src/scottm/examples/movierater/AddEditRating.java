@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
@@ -29,7 +28,7 @@ public class AddEditRating extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.add_rating);
+		setContentView(R.layout.signup);
 
 //		title = (EditText) findViewById(R.id.titleEditText);
 //		rating = (RatingBar) findViewById(R.id.editRating);

@@ -11,7 +11,8 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         
-        android:text="Recommend" 
+        android:text="Recommend"
+        android:onClick="onRecommendClick"
        	/>
 
     <Button

@@ -4,67 +4,72 @@
     android:layout_height="wrap_content"
     android:layout_weight="1" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+
         android:orientation="vertical"
         android:padding="5dp" >
 
+
         <EditText
-            android:id="@+id/titleEditText"
+            android:id="@+id/new_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/title"
+            android:hint="@string/new_email"
             android:imeOptions="actionNext"
-            android:inputType="textCapWords" >
+            android:inputType="text"
+            >
+            
         </EditText>
 
         <EditText
-            android:id="@+id/genreEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_genre"
-            android:imeOptions="actionNext"
-            android:inputType="textCapWords|textAutoComplete" >
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:layout_below= "@id/new_email"
+                >
         </EditText>
 
         <EditText
-            android:id="@+id/dateSeenEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_date_seen"
-            android:imeOptions="actionNext"
-            android:inputType="date" >
-        </EditText>
-
-        <EditText
-            android:id="@+id/tag1EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_tag1"
-            android:imeOptions="actionNext"
-            android:inputType="text" >
-        </EditText>
-
-        <EditText
-            android:id="@+id/tag2EditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_tag2"
-            android:imeOptions="actionDone"
-            android:inputType="text" >
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:layout_below= "@id/password"
+                >
         </EditText>
 
         <Button
-            android:id="@+id/saveRatingButton"
+            android:id="@+id/accept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/confirm_password"
             android:layout_marginTop="15dp"
-            android:text="Submit"
-            android:textSize="30sp" >
-        </Button>
-    </LinearLayout>
+            android:layout_weight="2.53"
+            android:text="@string/accept"
+            android:onClick="onAcceptClick"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_weight="2.53"
+            android:text="@string/cancel"
+            android:textSize="30sp"
+            android:layout_toRightOf="@id/accept"
+            android:onClick="onCancelClick"
+            android:layout_below="@id/confirm_password"
+             />
+
+    </RelativeLayout>
 
 </ScrollView>

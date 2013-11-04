@@ -1,22 +1,21 @@
 package scottm.examples.movierater;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
 
-public class WelcomeScreen extends Activity {
-
-	private static final String TAG = "welcome";
-
+public class RecommendScreen extends Activity {
+    
+    private static final String TAG = "AddEditRating";
+    
 	private long rowID; 
 
 	private EditText title;
@@ -25,18 +24,17 @@ public class WelcomeScreen extends Activity {
 	private EditText dateSeen;
 	private EditText tag1;
 	private EditText tag2;
-	//comment
-	//comment2
+
 	// called when the Activity is first started
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.welcome_screen);
+		setContentView(R.layout.recommend);
 
-		//		title = (EditText) findViewById(R.id.titleEditText);
-		//		rating = (RatingBar) findViewById(R.id.editRating);
-		//		dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
-		//		genre = (EditText) findViewById(R.id.genreEditText);
+		title = (EditText) findViewById(R.id.titleEditText);
+//		rating = (RatingBar) findViewById(R.id.editRating);
+		dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
+		genre = (EditText) findViewById(R.id.genreEditText);
 		tag1 = (EditText) findViewById(R.id.username);
 		tag2 = (EditText) findViewById(R.id.password);
 
@@ -46,9 +44,9 @@ public class WelcomeScreen extends Activity {
 		if (extras != null) {
 			rowID = extras.getLong("row_id");
 			title.setText(extras.getString("name"));  
-			rating.setRating(extras.getFloat("rating"));
+//			rating.setRating(extras.getFloat("rating"));
 			Log.d(TAG, "rating from field:" + extras.getFloat("rating"));
-			Log.d(TAG, "rating in UI component: " + rating.getRating());
+//			Log.d(TAG, "rating in UI component: " + rating.getRating());
 			dateSeen.setText(extras.getString("dateSeen"));  
 			genre.setText(extras.getString("genre"));  
 			tag1.setText(extras.getString("tag1"));  
@@ -56,26 +54,10 @@ public class WelcomeScreen extends Activity {
 		} // end if
 
 		// set event listener for the Save Rating Button
-		//		Button saveRatingButton = 
-		//				(Button) findViewById(R.id.saveRatingButton);
-		//		saveRatingButton.setOnClickListener(saveRatingButtonClicked);
+		Button saveRatingButton = 
+				(Button) findViewById(R.id.saveRatingButton);
+		saveRatingButton.setOnClickListener(saveRatingButtonClicked);
 	} 
-
-
-	public void onSignupClick(View view){
-
-		Intent intent = new Intent(this, SignUp.class);
-		startActivity(intent);
-//		 Do something in response to button
-
-	}
-	public void onLoginClick(View view){
-
-		Intent intent = new Intent(this, MainMenu.class);
-		startActivity(intent);
-//		 Do something in response to button
-
-	}
 
 	// responds to event generated when user clicks the Done Button
 	OnClickListener saveRatingButtonClicked = new OnClickListener() { 
@@ -104,7 +86,7 @@ public class WelcomeScreen extends Activity {
 			else {
 				// create a new AlertDialog Builder
 				AlertDialog.Builder builder = 
-						new AlertDialog.Builder(WelcomeScreen.this);
+				new AlertDialog.Builder(RecommendScreen.this);
 
 				// set dialog title & message, and provide Button to dismiss
 				builder.setTitle(R.string.errorTitle); 
@@ -119,15 +101,15 @@ public class WelcomeScreen extends Activity {
 	private void saveRating() {
 		// get DatabaseConnector to interact with the SQLite database
 		DatabaseConnector databaseConnector = new DatabaseConnector(this);
-
-
-		Log.d(TAG, "rating inserted into DB: " + (rating.getRating() * 2));
+		
+		
+//		Log.d(TAG, "rating inserted into DB: " + (rating.getRating() * 2));
 
 		if (getIntent().getExtras() == null) {
 			// insert the rating information into the database
 			databaseConnector.insertRating(
 					title.getText().toString(),
-					(int) (rating.getRating() * 2),
+					2,
 					genre.getText().toString(), 
 					dateSeen.getText().toString(), 
 					tag1.getText().toString(),
@@ -136,7 +118,7 @@ public class WelcomeScreen extends Activity {
 		else {
 			databaseConnector.updateRating(rowID,
 					title.getText().toString(),
-					(int) (rating.getRating() * 2),
+					2,
 					genre.getText().toString(), 
 					dateSeen.getText().toString(), 
 					tag1.getText().toString(),

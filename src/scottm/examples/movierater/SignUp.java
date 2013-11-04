@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 
-public class MainMenu extends Activity {
+public class SignUp extends Activity {
 
 
 
@@ -16,26 +16,27 @@ public class MainMenu extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.main_menu);
+		setContentView(R.layout.signup);
 
 
 	}
 
-    public void onRecommendClick(View view){
+    public void onAcceptClick(View view){
 
-        Intent intent = new Intent(this, RecommendScreen.class);
+        Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
 //		 Do something in response to button
 
     }
 
-	// responds to event generated when user clicks the Done Button
-	OnClickListener saveRatingButtonClicked = new OnClickListener() { 
-		@Override
-		public void onClick(View v) {
-			
-		} 
-	}; 
+
+    public void onCancelClick(View view){
+
+        Intent intent = new Intent(this, WelcomeScreen.class);
+        startActivity(intent);
+//		 Do something in response to button
+
+    }
 
 
  

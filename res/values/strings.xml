@@ -11,6 +11,7 @@
     <string name="label_tag2">TAG 2</string>
     <string name="user">Username</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_delete">Delete</string>
     <string name="button_add_rating">Add Rating</string>
@@ -26,6 +27,9 @@
     <string name="title">Title</string>
     <string name="save_rating_button">Save Rating</string>
     <string name="login">Login</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_email">New e-mail</string>
     <string name="todo">TODO</string>
     
     

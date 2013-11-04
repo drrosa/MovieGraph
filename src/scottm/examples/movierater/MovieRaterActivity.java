@@ -107,7 +107,7 @@ public class MovieRaterActivity extends ListActivity {
 				new Intent(this, AddEditRating.class);
 		startActivity(addNewContact); 
 		return super.onOptionsItemSelected(item); 
-	} 
+	}
 
 
 	// event listener that responds to the user touching a contact's name
@@ -119,12 +119,12 @@ public class MovieRaterActivity extends ListActivity {
 
 			Log.d("MoiveRater", "postion: " + position + ", id: " + id);
 			// create an Intent to launch the ViewRating Activity
-			Intent viewContact = 
+			Intent viewContact =
 					new Intent(MovieRaterActivity.this, ViewRating.class);
 
 			// pass the selected contact's row ID as an extra with the Intent
 			viewContact.putExtra(ROW_ID, id);
 			startActivity(viewContact);
-		} 
-	}; 
+		}
+	};
 }
