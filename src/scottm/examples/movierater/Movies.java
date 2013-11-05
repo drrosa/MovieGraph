@@ -20,19 +20,25 @@ public class Movies extends ListActivity {
 
 	public static final String ROW_ID = "row_id"; // Intent extra key
 	private ListView ratingListView; 
-	private CursorAdapter ratingAdapter; 
+	private CursorAdapter ratingAdapter;
+    private String buttonClicked;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) { 
 
 		super.onCreate(savedInstanceState);
-		ratingListView = getListView(); 
+
+        Intent intent = getIntent();
+        buttonClicked = intent.getStringExtra("buttonClicked");
+
+        ratingListView = getListView();
 		ratingListView.setOnItemClickListener(viewRatingListener);      
 
 		// map each ratings's name to a TextView
 		// in the ListView layout
 		String[] from = new String[] { "name" };
 		int[] to = new int[] { R.id.ratingTextView };
+
 		ratingAdapter = new SimpleCursorAdapter(
 				Movies.this,
 				R.layout.rating_list_item, null, 
@@ -63,22 +69,37 @@ public class Movies extends ListActivity {
 
 	// performs database query outside GUI thread
 	private class GetRatingsTask extends AsyncTask<Object, Object, Cursor> {
-		DatabaseConnector databaseConnector = 
-				new DatabaseConnector(Movies.this);
+		DatabasePending databasePending = new DatabasePending(Movies.this);
+        DatabaseSeen databaseSeen = new DatabaseSeen(Movies.this);
+        DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(Movies.this);
 
-		// perform the database access
+
+        // perform the database access
 		@Override
 		protected Cursor doInBackground(Object... params) {
-			databaseConnector.open();
+			databasePending.open();
+            databaseSeen.open();
+            databaseAllMovies.open();
 
-			return databaseConnector.getAllRatings(); 
+            Cursor movieList = null;
+
+            if(buttonClicked.equals("pending"))
+                movieList = databasePending.getAllMovies();
+            else if(buttonClicked.equals("seen"))
+                movieList = databaseSeen.getAllMovies();
+            else if(buttonClicked.equals("all"))
+                movieList = databaseAllMovies.getAllMovies();
+
+			return movieList;
 		} 
 
 		// use the Cursor returned from the doInBackground method
 		@Override
 		protected void onPostExecute(Cursor result) {
 			ratingAdapter.changeCursor(result); 
-			databaseConnector.close();
+			databasePending.close();
+            databaseSeen.close();
+            databaseAllMovies.close();
 		} 
 	} // end class GetContactsTask
 

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,7 +16,7 @@ public class ViewRating extends Activity {
 
 	private long rowID; 
 	private TextView name; 
-	private TextView genre;
+	private TextView mood;
 	private TextView dateSeen; 
 	private TextView tag1;
 	private TextView tag2;
@@ -29,7 +28,7 @@ public class ViewRating extends Activity {
 		setContentView(R.layout.rating_view);
 
 		name = (TextView) findViewById(R.id.nameTextView);
-		genre = (TextView) findViewById(R.id.genreTextView);
+		mood = (TextView) findViewById(R.id.genreTextView);
 		dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
 		tag1 = (TextView) findViewById(R.id.tag1TextView);
 		tag2 = (TextView) findViewById(R.id.tag2TextView);
@@ -37,7 +36,7 @@ public class ViewRating extends Activity {
 		// get the selected rating's row ID
 		Bundle extras = getIntent().getExtras();
 		rowID = extras.getLong(Movies.ROW_ID);
-	} 
+	}
 
 
 	// called when the activity is first created
@@ -53,17 +52,17 @@ public class ViewRating extends Activity {
 	// performs database query outside GUI thread
 	private class LoadRatingTask extends AsyncTask<Long, Object, Cursor> {
 
-		DatabaseConnector databaseConnector = 
-				new DatabaseConnector(ViewRating.this);
+		DatabaseAllMovies databaseAllMovies =
+				new DatabaseAllMovies(ViewRating.this);
 
 
 		// perform the database access
 		@Override
 		protected Cursor doInBackground(Long... params) {
-			databaseConnector.open();
+			databaseAllMovies.open();
 
 			// get a cursor containing all data on given entry
-			return databaseConnector.getOneRating(params[0]);
+			return databaseAllMovies.getOneRating(params[0]);
 		}
 
 
@@ -76,22 +75,20 @@ public class ViewRating extends Activity {
 
 			// get the column index for each data item
 			int nameIndex = result.getColumnIndex("name");
-			int ratingIndex = result.getColumnIndex("rating");
-			Log.d("ViewRating", "rating column index: " + ratingIndex);
-			int genreIndex = result.getColumnIndex("genre");
+			int moodIndex = result.getColumnIndex("mood");
 			int dateSeenIndex = result.getColumnIndex("dateSeen");
 			int tag1Index = result.getColumnIndex("tag1");
 			int tag2Index = result.getColumnIndex("tag2");
 
 			// fill TextViews with the retrieved data
 			name.setText(result.getString(nameIndex));
-			genre.setText(result.getString(genreIndex));
+			mood.setText(result.getString(moodIndex));
 			dateSeen.setText(result.getString(dateSeenIndex));
 			tag1.setText(result.getString(tag1Index));
 			tag2.setText(result.getString(tag2Index));
 
 			result.close();
-			databaseConnector.close(); 
+			databaseAllMovies.close();
 		} 
 	} // end class LoadRatingTask
 
@@ -118,7 +115,7 @@ public class ViewRating extends Activity {
 			// pass the selected rating's data as extras with the Intent
 			recommendMovie.putExtra(Movies.ROW_ID, rowID);
 			recommendMovie.putExtra("name", name.getText());
-			recommendMovie.putExtra("genre", genre.getText());
+			recommendMovie.putExtra("mood", mood.getText());
 			recommendMovie.putExtra("dateSeen", dateSeen.getText());
 			recommendMovie.putExtra("tag1", tag1.getText());
 			recommendMovie.putExtra("tag2", tag2.getText());
@@ -150,8 +147,8 @@ public class ViewRating extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int button) {
 
-				final DatabaseConnector databaseConnector = 
-						new DatabaseConnector(ViewRating.this);
+				final DatabaseAllMovies databaseAllMovies =
+						new DatabaseAllMovies(ViewRating.this);
 
 				// create an AsyncTask that deletes the rating in another 
 				// thread, then calls finish after the deletion
@@ -160,7 +157,7 @@ public class ViewRating extends Activity {
 
 					@Override
 					protected Object doInBackground(Long... params) {
-						databaseConnector.deleteRating(params[0]); 
+						databaseAllMovies.deleteRating(params[0]);
 						return null;
 					} 
 

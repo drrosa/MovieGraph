@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -93,7 +92,7 @@ public class RecommendMovie extends Activity {
 
     private void saveRating() {
         // get DatabaseConnector to interact with the SQLite database
-        DatabaseConnector databaseConnector = new DatabaseConnector(this);
+        DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(this);
 
 
         if (getIntent().getExtras() == null) {
@@ -101,10 +100,10 @@ public class RecommendMovie extends Activity {
 
             //If user types "populate" the database will get populated with test data.
             if(title.getText().toString().equals("populate")){
-                databaseConnector.populatePending();
+                databaseAllMovies.populateMoviesDB();
             }
 
-            databaseConnector.insertRating(
+            databaseAllMovies.insertRating(
                     title.getText().toString(),
                     genre.getText().toString(),
                     dateSeen.getText().toString(),
@@ -112,7 +111,7 @@ public class RecommendMovie extends Activity {
                     tag2.getText().toString());
         }
         else {
-            databaseConnector.updateRating(rowID,
+            databaseAllMovies.updateRating(rowID,
                     title.getText().toString(),
                     genre.getText().toString(),
                     dateSeen.getText().toString(),

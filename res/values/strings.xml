@@ -26,6 +26,7 @@
     <string name="button_recommend">Recommend to…</string>
     <string name="button_pending">I haven\'t seen…</string>
     <string name="button_watched">I\'ve seen…</string>
+    <string name="button_all_movies">All Movies</string>
     <string name="menuitem_add_rating">Add Rating</string>
     <string name="menuitem_edit_rating">Edit Rating</string>
     <string name="menuitem_delete_rating">Delete Rating</string>

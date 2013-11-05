@@ -33,4 +33,13 @@
         android:onClick="onSeenClick"
     />
 
+    <Button
+            android:id="@+id/all_movies"
+            android:layout_width="195dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:text="@string/button_all_movies"
+            android:onClick="onAllMoviesClick"
+            />
+
 </LinearLayout>
