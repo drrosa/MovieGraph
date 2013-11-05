@@ -98,6 +98,12 @@ public class RecommendMovie extends Activity {
 
         if (getIntent().getExtras() == null) {
             // insert the rating information into the database
+
+            //If user types "populate" the database will get populated with test data.
+            if(title.getText().toString().equals("populate")){
+                databaseConnector.populatePending();
+            }
+
             databaseConnector.insertRating(
                     title.getText().toString(),
                     genre.getText().toString(),

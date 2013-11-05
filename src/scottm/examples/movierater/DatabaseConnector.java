@@ -33,7 +33,23 @@ public class DatabaseConnector {
     public void close() {
         if (database != null)
             database.close();
-    } 
+    }
+
+
+
+    public void populatePending(){
+        insertRating("Batman: The Dark Knight", "Action", "2008", "A", "B");
+        insertRating("The Lord of The Rings: The Return of the King", "Fantasy", "2005", "A", "B");
+        insertRating("Teletubies", "Horror", "666", "A", "B");
+        insertRating("David esta Perdido", "Suspense", "2011", "A", "B");
+        insertRating("Norman the Great", "Documentary", "2008", "A", "B");
+        insertRating("Falling Skies", "Action", "2011", "A", "B");
+        insertRating("The Walking Dead: The Movie", "Action", "2015", "A", "B");
+        insertRating("Dragon Ball Z", "Action", "2008", "A", "B");
+        insertRating("WAAAzup!!!", "Comedy", "1777", "A", "B");
+
+
+    }
 
 
     // inserts a new rating into the database
@@ -121,6 +137,10 @@ public class DatabaseConnector {
                     "tag2 TEXT)";
 
             db.execSQL(createQuery);
+
+
+
+
         }
 
 
