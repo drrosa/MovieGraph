@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class ViewRating extends Activity {
@@ -37,7 +36,7 @@ public class ViewRating extends Activity {
 
 		// get the selected rating's row ID
 		Bundle extras = getIntent().getExtras();
-		rowID = extras.getLong(MovieRaterActivity.ROW_ID); 
+		rowID = extras.getLong(Movies.ROW_ID);
 	} 
 
 
@@ -117,7 +116,7 @@ public class ViewRating extends Activity {
 			    new Intent(this, RecommendMovie.class);
 
 			// pass the selected rating's data as extras with the Intent
-			recommendMovie.putExtra(MovieRaterActivity.ROW_ID, rowID);
+			recommendMovie.putExtra(Movies.ROW_ID, rowID);
 			recommendMovie.putExtra("name", name.getText());
 			recommendMovie.putExtra("genre", genre.getText());
 			recommendMovie.putExtra("dateSeen", dateSeen.getText());

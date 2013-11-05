@@ -16,12 +16,11 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class MovieRaterActivity extends ListActivity {
+public class Movies extends ListActivity {
 
 	public static final String ROW_ID = "row_id"; // Intent extra key
 	private ListView ratingListView; 
 	private CursorAdapter ratingAdapter; 
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) { 
@@ -35,16 +34,12 @@ public class MovieRaterActivity extends ListActivity {
 		String[] from = new String[] { "name" };
 		int[] to = new int[] { R.id.ratingTextView };
 		ratingAdapter = new SimpleCursorAdapter(
-				MovieRaterActivity.this, 
+				Movies.this,
 				R.layout.rating_list_item, null, 
 				from, to);
-		// public SimpleCursorAdapter (Context context, 
-		// int layout, Cursor c, 
-		// String[] from, int[] to)
 
 		setListAdapter(ratingAdapter); 
-	} 
-
+	}
 
 	@Override
 	protected void onResume() {
@@ -64,13 +59,12 @@ public class MovieRaterActivity extends ListActivity {
 
 		ratingAdapter.changeCursor(null); // adapter now has no Cursor
 		super.onStop();
-	} 
-
+	}
 
 	// performs database query outside GUI thread
 	private class GetRatingsTask extends AsyncTask<Object, Object, Cursor> {
 		DatabaseConnector databaseConnector = 
-				new DatabaseConnector(MovieRaterActivity.this);
+				new DatabaseConnector(Movies.this);
 
 		// perform the database access
 		@Override
@@ -96,8 +90,7 @@ public class MovieRaterActivity extends ListActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.movie_rating_menu, menu);
 		return true;
-	} 
-
+	}
 
 	// handle choice from options menu
 	@Override
@@ -109,7 +102,6 @@ public class MovieRaterActivity extends ListActivity {
 		return super.onOptionsItemSelected(item); 
 	}
 
-
 	// event listener that responds to the user touching a contact's name
 	// in the ListView
 	OnItemClickListener viewRatingListener = new OnItemClickListener() {
@@ -120,7 +112,7 @@ public class MovieRaterActivity extends ListActivity {
 			Log.d("MoiveRater", "postion: " + position + ", id: " + id);
 			// create an Intent to launch the ViewRating Activity
 			Intent viewContact =
-					new Intent(MovieRaterActivity.this, ViewRating.class);
+					new Intent(Movies.this, ViewRating.class);
 
 			// pass the selected contact's row ID as an extra with the Intent
 			viewContact.putExtra(ROW_ID, id);
