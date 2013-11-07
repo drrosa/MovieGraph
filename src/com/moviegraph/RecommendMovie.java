@@ -94,6 +94,8 @@ public class RecommendMovie extends Activity {
         // get DatabaseConnector to interact with the SQLite database
         DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(this);
 
+        DatabaseSeen databaseSeen = new DatabaseSeen(this);
+
 
         if (getIntent().getExtras() == null) {
             // insert the rating information into the database
@@ -109,9 +111,27 @@ public class RecommendMovie extends Activity {
                     dateSeen.getText().toString(),
                     tag1.getText().toString(),
                     tag2.getText().toString());
+
+//            int id= databaseAllMovies.getMovieId(title.getText().toString()).getInt(0);
+            databaseSeen.insertRating(
+                    title.getText().toString(),
+                    genre.getText().toString(),
+                    dateSeen.getText().toString(),
+                    tag1.getText().toString(),
+                    tag2.getText().toString());
+
         }
         else {
             databaseAllMovies.updateRating(rowID,
+                    title.getText().toString(),
+                    genre.getText().toString(),
+                    dateSeen.getText().toString(),
+                    tag1.getText().toString(),
+                    tag2.getText().toString());
+
+
+
+            databaseSeen.updateRating(rowID,
                     title.getText().toString(),
                     genre.getText().toString(),
                     dateSeen.getText().toString(),

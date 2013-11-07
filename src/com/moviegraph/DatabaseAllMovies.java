@@ -49,6 +49,13 @@ public class DatabaseAllMovies {
 
     }
 
+    // get a Cursor containing information about the movie specified
+    // by the given name
+    public Cursor getMovieId(String name) {
+        return database.query(
+                "all_movies", new String[] {"_id"}, "name=" + name, null, null, null, null);
+
+    }
 
     // inserts a new rating into the database
     public void insertRating(String title,
