@@ -1,4 +1,4 @@
-package scottm.examples.movierater;
+package com.moviegraph;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package scottm.examples.movierater;
+package com.moviegraph;
 
 
 import android.app.Activity;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RatingBar;
 
 
 public class SignUp extends Activity {

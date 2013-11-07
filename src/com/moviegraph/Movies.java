@@ -1,4 +1,4 @@
-package scottm.examples.movierater;
+package com.moviegraph;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -32,7 +32,7 @@ public class Movies extends ListActivity {
         buttonClicked = intent.getStringExtra("buttonClicked");
 
         ratingListView = getListView();
-		ratingListView.setOnItemClickListener(viewRatingListener);      
+		ratingListView.setOnItemClickListener(viewRatingListener);
 
 		// map each ratings's name to a TextView
 		// in the ListView layout

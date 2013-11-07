@@ -1,4 +1,4 @@
-package scottm.examples.movierater;
+package com.moviegraph;
 
 /**
  * Created by drrt on 11/5/13.
