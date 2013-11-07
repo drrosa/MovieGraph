@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class ViewRating extends Activity {
@@ -25,7 +26,7 @@ public class ViewRating extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.rating_view);
+		setContentView(R.layout.movie_info);
 
 		name = (TextView) findViewById(R.id.nameTextView);
 		mood = (TextView) findViewById(R.id.genreTextView);
@@ -102,6 +103,69 @@ public class ViewRating extends Activity {
 		return true;
 	}
 
+    public void onMustSeeClick(View view){
+//        asyncTask(true).execute(new Long[] { rowID });
+
+        findViewById(R.id.recommended).setEnabled(false);
+        findViewById(R.id.worth_watching).setEnabled(false);
+        findViewById(R.id.haven_not_seen).setEnabled(false);
+    }
+
+    public void onRecommendedClick(View view){
+//        asyncTask(true).execute(new Long[] { rowID });
+        findViewById(R.id.must_see).setEnabled(false);
+        findViewById(R.id.worth_watching).setEnabled(false);
+        findViewById(R.id.haven_not_seen).setEnabled(false);
+    }
+
+    public void onWorthWatchingClick(View view){
+//        asyncTask(true).execute(new Long[]{rowID});
+        findViewById(R.id.must_see).setEnabled(false);
+        findViewById(R.id.recommended).setEnabled(false);
+        findViewById(R.id.haven_not_seen).setEnabled(false);
+    }
+
+    public void onNotSeenClick(View view){
+//        asyncTask(false).execute(new Long[]{rowID});
+        findViewById(R.id.must_see).setEnabled(false);
+        findViewById(R.id.worth_watching).setEnabled(false);
+        findViewById(R.id.recommended).setEnabled(false);
+    }
+
+    private final DatabaseSeen databaseSeen = new DatabaseSeen(ViewRating.this);
+    private final DatabasePending databasePending = new DatabasePending(ViewRating.this);
+
+
+    public AsyncTask asyncTask(final boolean seen){
+
+
+        AsyncTask<Long, Object, Object> moveMovieTask =
+                new AsyncTask<Long, Object, Object>() {
+
+                    @Override
+                    protected Object doInBackground(Long... params) {
+                        if(seen){
+                            if( findViewById(R.id.haven_not_seen).isEnabled() )
+                                databasePending.deleteRating(params[0]);
+//                              databaseSeen.insertRating(params[0]);
+                        }
+                        else{
+                            databaseSeen.deleteRating(params[0]);
+//                          databasePending.insertRating(params[0]);
+                         }
+
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Object result) {
+                        finish();
+                    }
+                };
+
+        // save the rating to the database using a separate thread
+        return moveMovieTask;
+    }
 
 	// handle choice from options menu
 	@Override

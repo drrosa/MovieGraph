@@ -11,7 +11,7 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_must_see"
-        android:onClick="onRecommendClick"
+        android:onClick="onMustSeeClick"
     />
 
     <Button
@@ -20,7 +20,7 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_recommended"
-        android:onClick="onPendingClick"
+        android:onClick="onRecommendClick"
     />
 
     <Button
@@ -29,6 +29,7 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_worth_watching"
+        android:onClick="onWorthWatchingClick"
     />
 
     <Button
@@ -37,6 +38,7 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_have_not_seen"
+        android:onClick="onNotSeenClick"
     />
 
 </LinearLayout>

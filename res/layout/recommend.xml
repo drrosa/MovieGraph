@@ -24,7 +24,7 @@
             android:id="@+id/genreEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/label_genre"
+            android:hint="@string/mood"
             android:imeOptions="actionNext"
             android:inputType="textCapWords|textAutoComplete" >
         </EditText>

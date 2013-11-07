@@ -41,7 +41,7 @@ public class Movies extends ListActivity {
 
 		ratingAdapter = new SimpleCursorAdapter(
 				Movies.this,
-				R.layout.rating_list_item, null, 
+				R.layout.movie_list_item, null,
 				from, to);
 
 		setListAdapter(ratingAdapter); 

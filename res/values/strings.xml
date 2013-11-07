@@ -5,7 +5,7 @@
     <string name="app_name">MovieGraph</string>
     <string name="label_name">Title</string>
     <string name="label_rating">Rating</string>
-    <string name="label_genre">Genre</string>
+    <string name="mood">Mood</string>
     <string name="label_date_seen">Date Seen</string>
     <string name="label_tag1">TAG 1</string>
     <string name="label_tag2">TAG 2</string>
