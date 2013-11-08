@@ -24,21 +24,21 @@ public class MainMenu extends Activity {
     public void onPendingClick(View view){
 
         Intent intent = new Intent(this, Movies.class);
-        intent.putExtra("buttonClicked", "pending");
+        intent.putExtra("listID", 0);
         startActivity(intent);
     }
 
     public void onSeenClick(View view){
 
         Intent intent = new Intent(this, Movies.class);
-        intent.putExtra("buttonClicked", "seen");
+        intent.putExtra("listID", 1);
         startActivity(intent);
     }
 
     public void onAllMoviesClick(View view){
 
         Intent intent = new Intent(this, Movies.class);
-        intent.putExtra("buttonClicked", "all");
+        intent.putExtra("listID", 2);
         startActivity(intent);
     }
 }

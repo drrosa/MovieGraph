@@ -11,7 +11,7 @@ public class DatabasePending {
     private static final String TAG = "DatabaseConnector";
 
     private static final String DATABASE_NAME = "MovieGraph";
-    private static final String TABLE_NAME = "pending_movies";
+    public static final String TABLE_NAME = "pending_movies";
     private SQLiteDatabase database; 
     private DatabaseOpenHelper databaseOpenHelper; 
 
@@ -33,17 +33,11 @@ public class DatabasePending {
             database.close();
     }
 
-
     // inserts a new rating into the database
-    public void insertRating(String title,
-            String mood, String dateSeen, String tag1, String tag2) {
+    public void insertMovie(long movieID) {
 
         ContentValues newRating = new ContentValues();
-        newRating.put("name", title);
-        newRating.put("mood", mood);
-        newRating.put("dateSeen", dateSeen);
-        newRating.put("tag1", tag1);
-        newRating.put("tag2", tag2);
+        newRating.put("movie_id", movieID);
 
         open();
         database.insert(TABLE_NAME, null, newRating);
@@ -52,24 +46,41 @@ public class DatabasePending {
 
 
     // updates a rating in the database
-    public void updateRating(long id, String name,
-            String mood, String dateSeen, String tag1, String tag2) {
+    public void updateMovie(long id) {
 
         ContentValues editRating = new ContentValues();
-        editRating.put("name", name);
-        editRating.put("mood", mood);
-        editRating.put("dateSeen", dateSeen);
-        editRating.put("tag1", tag1);
-        editRating.put("tag2", tag2);
+//        editRating.put();
 
         open(); 
         database.update(TABLE_NAME, editRating, "_id=" + id, null);
         close(); 
-    } 
+    }
+
+    public String[] getAllMovieIds(){
+
+        Cursor result = database.query(TABLE_NAME, new String[] {"movie_id"}, null, null, null, null, "movie_id");
+        String [] movieIdList = new String  [result.getCount()];
+
+        int colID = result.getColumnIndex("movie_id");
+
+        for(int i=0; result.moveToNext(); i++){
+            movieIdList[i] = result.getString(colID);
+        }
+
+        return movieIdList;
+    }
 
     public Cursor getAllMovies() {
-        return database.query(TABLE_NAME, new String[] {"_id", "name"},
-                null, null, null, null, "name");
+        String[] selectionArgs =  getAllMovieIds();
+        String selection = "_id IN(?";
+
+        for(int i=0; i < selectionArgs.length - 1; i++)
+            selection += ",?";
+
+        selection += ")";
+
+        return database.query(DatabaseAllMovies.TABLE_NAME, new String[] {"_id", "name"},
+                selection, selectionArgs, null, null, "name");
         // query(String table, 
         // String[] columns, String selection, String[] selectionArgs, 
         // String groupBy, String having, String orderBy)
@@ -89,9 +100,9 @@ public class DatabasePending {
 
 
     // delete the rating specified by the given id
-    public void deleteRating(long id) {
+    public void deleteMovie(long id) {
         open(); 
-        database.delete(TABLE_NAME, "_id=" + id, null);
+        database.delete(TABLE_NAME, "movie_id=" + id, null);
         close();
     }
 } 

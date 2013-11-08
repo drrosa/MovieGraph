@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,10 +16,11 @@ public class RecommendMovie extends Activity {
     private long rowID;
 
     private EditText title;
-    private EditText genre;
+    private EditText mood;
     private EditText dateSeen;
     private EditText tag1;
     private EditText tag2;
+    private int buttonID;
 
     // called when the Activity is first started
     @Override
@@ -29,8 +29,7 @@ public class RecommendMovie extends Activity {
         setContentView(R.layout.recommend);
 
         title = (EditText) findViewById(R.id.titleEditText);
-        dateSeen = (EditText) findViewById(R.id.dateSeenEditText);
-        genre = (EditText) findViewById(R.id.genreEditText);
+        mood = (EditText) findViewById(R.id.moodEditText);
         tag1 = (EditText) findViewById(R.id.tag1EditText);
         tag2 = (EditText) findViewById(R.id.tag2EditText);
 
@@ -41,7 +40,7 @@ public class RecommendMovie extends Activity {
             rowID = extras.getLong("_id");
             title.setText(extras.getString("name"));
             dateSeen.setText(extras.getString("dateSeen"));
-            genre.setText(extras.getString("mood"));
+            mood.setText(extras.getString("mood"));
             tag1.setText(extras.getString("tag1"));
             tag2.setText(extras.getString("tag2"));
         } // end if
@@ -63,7 +62,7 @@ public class RecommendMovie extends Activity {
 
                             @Override
                             protected Object doInBackground(Object... params) {
-                                saveRating();
+                                saveMovie();
                                 return null;
                             }
 
@@ -90,8 +89,19 @@ public class RecommendMovie extends Activity {
         }
     };
 
+    public void onFirstMustSee(View view){
+        buttonID = 0;
+    }
 
-    private void saveRating() {
+    public void onFirstRecommended(View view){
+        buttonID = 1;
+    }
+
+    public void onFirstWorthWatching(View view){
+        buttonID = 2;
+    }
+
+    private void saveMovie() {
         // get DatabaseConnector to interact with the SQLite database
         DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(this);
 
@@ -106,21 +116,19 @@ public class RecommendMovie extends Activity {
                 databaseAllMovies.populateMoviesDB();
             }
 
-            rowID = databaseAllMovies.insertRating(
+            rowID = databaseAllMovies.insertMovie(
                     title.getText().toString(),
-                    genre.getText().toString(),
-                    dateSeen.getText().toString(),
+                    mood.getText().toString(),
                     tag1.getText().toString(),
                     tag2.getText().toString());
 
-//            int id= databaseAllMovies.getMovieId(title.getText().toString()).getInt(0);
-            databaseSeen.insertRating(rowID);
+            databaseSeen.insertMovie(rowID, buttonID);
 
         }
         else {
-            databaseAllMovies.updateRating(rowID,
+            databaseAllMovies.updateMovie(rowID,
                     title.getText().toString(),
-                    genre.getText().toString(),
+                    mood.getText().toString(),
                     dateSeen.getText().toString(),
                     tag1.getText().toString(),
                     tag2.getText().toString());

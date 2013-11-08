@@ -28,6 +28,48 @@
         </TableRow>
     </TableLayout>
 
+    <LinearLayout android:id="@+id/liked_buttons"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content">
+        <Button
+                android:id="@+id/must_see"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:text="@string/button_must_see"
+                android:onClick="onMustSeeClick"
+                />
+
+        <Button
+                android:id="@+id/recommended"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:text="@string/button_recommended"
+                android:onClick="onRecommendedClick"
+                />
+
+        <Button
+                android:id="@+id/worth_watching"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:text="@string/button_worth_watching"
+                android:onClick="onWorthWatchingClick"
+                />
+
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/haven_not_seen"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:layout_below="@id/liked_buttons"
+            android:text="@string/button_have_not_seen"
+            android:onClick="onNotSeenClick"
+    />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

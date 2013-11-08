@@ -36,15 +36,15 @@ public class DatabaseAllMovies {
 
 
     public void populateMoviesDB(){
-        insertRating("Batman: The Dark Knight", "Action", "2008", "A", "B");
-        insertRating("The Lord of The Rings: The Return of the King", "Fantasy", "2005", "A", "B");
-        insertRating("Teletubies", "Horror", "666", "A", "B");
-        insertRating("David esta Perdido", "Suspense", "2011", "A", "B");
-        insertRating("Norman the Great", "Documentary", "2008", "A", "B");
-        insertRating("Falling Skies", "Action", "2011", "A", "B");
-        insertRating("The Walking Dead: The Movie", "Action", "2015", "A", "B");
-        insertRating("Dragon Ball Z", "Action", "2008", "A", "B");
-        insertRating("WAAAzup!!!", "Comedy", "1777", "A", "B");
+        insertMovie("Batman: The Dark Knight", "Action", "A", "B");
+        insertMovie("The Lord of The Rings: The Return of the King", "Fantasy", "A", "B");
+        insertMovie("Teletubies", "Horror", "A", "B");
+        insertMovie("David esta Perdido", "Suspense", "A", "B");
+        insertMovie("Norman the Great", "Documentary", "A", "B");
+        insertMovie("Falling Skies", "Action", "A", "B");
+        insertMovie("The Walking Dead: The Movie", "Action", "A", "B");
+        insertMovie("Dragon Ball Z", "Action", "A", "B");
+        insertMovie("WAAAzup!!!", "Comedy", "A", "B");
 
 
     }
@@ -58,13 +58,12 @@ public class DatabaseAllMovies {
     }
 
     // inserts a new rating into the database
-    public long insertRating(String title,
-            String mood, String dateSeen, String tag1, String tag2) {
+    public long insertMovie(String title,
+                            String mood, String tag1, String tag2) {
 
         ContentValues newRating = new ContentValues();
         newRating.put("name", title);
         newRating.put("mood", mood);
-        newRating.put("dateSeen", dateSeen);
         newRating.put("tag1", tag1);
         newRating.put("tag2", tag2);
 
@@ -77,8 +76,8 @@ public class DatabaseAllMovies {
 
 
     // updates a rating in the database
-    public void updateRating(long id, String name,
-            String mood, String dateSeen, String tag1, String tag2) {
+    public void updateMovie(long id, String name,
+                            String mood, String dateSeen, String tag1, String tag2) {
 
         ContentValues editRating = new ContentValues();
         editRating.put("name", name);
@@ -114,7 +113,7 @@ public class DatabaseAllMovies {
 
 
     // delete the rating specified by the given id
-    public void deleteRating(long id) {
+    public void deleteMovie(long id) {
         open(); 
         database.delete(TABLE_NAME, "_id=" + id, null);
         close();

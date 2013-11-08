@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1" >
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="5dp" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
 
         <EditText
             android:id="@+id/titleEditText"
@@ -20,22 +13,45 @@
             android:inputType="textCapWords" >
         </EditText>
 
+        <LinearLayout android:id="@+id/liked_buttons"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content">
+            <Button
+                    android:id="@+id/must_see"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:text="@string/button_must_see"
+                    android:onClick="onFirstMustSee"
+                    />
+
+            <Button
+                    android:id="@+id/recommended"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:text="@string/button_recommended"
+                    android:onClick="onFirstRecommended"
+                    />
+
+            <Button
+                    android:id="@+id/worth_watching"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:text="@string/button_worth_watching"
+                    android:onClick="onFirstWorthWatching"
+                    />
+
+        </LinearLayout>
+
         <EditText
-            android:id="@+id/genreEditText"
+            android:id="@+id/moodEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/mood"
             android:imeOptions="actionNext"
             android:inputType="textCapWords|textAutoComplete" >
-        </EditText>
-
-        <EditText
-            android:id="@+id/dateSeenEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/label_date_seen"
-            android:imeOptions="actionNext"
-            android:inputType="date" >
         </EditText>
 
         <EditText
@@ -65,6 +81,5 @@
             android:text="@string/button_submit"
             android:textSize="30sp" >
         </Button>
-    </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

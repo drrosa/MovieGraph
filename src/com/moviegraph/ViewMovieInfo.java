@@ -7,13 +7,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class ViewRating extends Activity {
+public class ViewMovieInfo extends Activity {
 
 	private long rowID; 
 	private TextView name; 
@@ -21,22 +22,32 @@ public class ViewRating extends Activity {
 	private TextView dateSeen; 
 	private TextView tag1;
 	private TextView tag2;
+    private int listID;
 
 	// called when the activity is first created
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.movie_info);
+        // get the selected rating's row ID
+        Bundle extras = getIntent().getExtras();
+        rowID = extras.getLong(Movies.ROW_ID);
+        listID = extras.getInt("listID");
+
+        switch(listID){
+            case 0: setContentView(R.layout.movie_info_pending);
+            break;
+            case 1: setContentView(R.layout.movie_info_seen);
+            break;
+            case 2: setContentView(R.layout.movie_info);
+            break;
+        }
+
 
 		name = (TextView) findViewById(R.id.nameTextView);
 		mood = (TextView) findViewById(R.id.genreTextView);
 		dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
 		tag1 = (TextView) findViewById(R.id.tag1TextView);
 		tag2 = (TextView) findViewById(R.id.tag2TextView);
-
-		// get the selected rating's row ID
-		Bundle extras = getIntent().getExtras();
-		rowID = extras.getLong(Movies.ROW_ID);
 	}
 
 
@@ -54,7 +65,7 @@ public class ViewRating extends Activity {
 	private class LoadRatingTask extends AsyncTask<Long, Object, Cursor> {
 
 		DatabaseAllMovies databaseAllMovies =
-				new DatabaseAllMovies(ViewRating.this);
+				new DatabaseAllMovies(ViewMovieInfo.this);
 
 
 		// perform the database access
@@ -104,39 +115,26 @@ public class ViewRating extends Activity {
 	}
 
     public void onMustSeeClick(View view){
-//        asyncTask(true).execute(new Long[] { rowID });
-
-        findViewById(R.id.recommended).setEnabled(false);
-        findViewById(R.id.worth_watching).setEnabled(false);
-        findViewById(R.id.haven_not_seen).setEnabled(false);
+        asyncTask().execute(new Long[] { rowID, 0L });
     }
 
     public void onRecommendedClick(View view){
-//        asyncTask(true).execute(new Long[] { rowID });
-        findViewById(R.id.must_see).setEnabled(false);
-        findViewById(R.id.worth_watching).setEnabled(false);
-        findViewById(R.id.haven_not_seen).setEnabled(false);
+        asyncTask().execute(new Long[] { rowID, 1L });
     }
 
     public void onWorthWatchingClick(View view){
-//        asyncTask(true).execute(new Long[]{rowID});
-        findViewById(R.id.must_see).setEnabled(false);
-        findViewById(R.id.recommended).setEnabled(false);
-        findViewById(R.id.haven_not_seen).setEnabled(false);
+        asyncTask().execute(new Long[]{rowID, 2L});
     }
 
     public void onNotSeenClick(View view){
-//        asyncTask(false).execute(new Long[]{rowID});
-        findViewById(R.id.must_see).setEnabled(false);
-        findViewById(R.id.worth_watching).setEnabled(false);
-        findViewById(R.id.recommended).setEnabled(false);
+        asyncTask().execute(new Long[]{rowID, 3L});
     }
 
-    private final DatabaseSeen databaseSeen = new DatabaseSeen(ViewRating.this);
-    private final DatabasePending databasePending = new DatabasePending(ViewRating.this);
+    private final DatabaseSeen databaseSeen = new DatabaseSeen(ViewMovieInfo.this);
+    private final DatabasePending databasePending = new DatabasePending(ViewMovieInfo.this);
 
 
-    public AsyncTask asyncTask(final boolean seen){
+    public AsyncTask asyncTask(){
 
 
         AsyncTask<Long, Object, Object> moveMovieTask =
@@ -144,15 +142,24 @@ public class ViewRating extends Activity {
 
                     @Override
                     protected Object doInBackground(Long... params) {
-                        if(seen){
-                            if( findViewById(R.id.haven_not_seen).isEnabled() )
-                                databasePending.deleteRating(params[0]);
-//                              databaseSeen.insertRating(params[0]);
+                        Long rowID = params[0];
+                        int buttonID = params[1].intValue();
+                        switch (listID){
+                            case 0: // Not Seen
+                                databaseSeen.insertMovie(rowID, buttonID);
+                                databasePending.deleteMovie(rowID);
+                            break;
+
+                            case 1: // Already seen, update tag
+                                if(buttonID <3){
+                                    databaseSeen.updateMovie(rowID, buttonID);
+                                }
+                                else{
+                                    databasePending.insertMovie(rowID);
+                                    databaseSeen.deleteMovie(rowID);
+                                }
+                            break;
                         }
-                        else{
-                            databaseSeen.deleteRating(params[0]);
-//                          databasePending.insertRating(params[0]);
-                         }
 
                         return null;
                     }
@@ -199,7 +206,7 @@ public class ViewRating extends Activity {
 	private void deleteRating() {
 		// create a new AlertDialog Builder
 		AlertDialog.Builder builder = 
-				new AlertDialog.Builder(ViewRating.this);
+				new AlertDialog.Builder(ViewMovieInfo.this);
 
 		builder.setTitle(R.string.confirmTitle); 
 		builder.setMessage(R.string.confirmMessage); 
@@ -212,7 +219,7 @@ public class ViewRating extends Activity {
 			public void onClick(DialogInterface dialog, int button) {
 
 				final DatabaseAllMovies databaseAllMovies =
-						new DatabaseAllMovies(ViewRating.this);
+						new DatabaseAllMovies(ViewMovieInfo.this);
 
 				// create an AsyncTask that deletes the rating in another 
 				// thread, then calls finish after the deletion
@@ -221,7 +228,7 @@ public class ViewRating extends Activity {
 
 					@Override
 					protected Object doInBackground(Long... params) {
-						databaseAllMovies.deleteRating(params[0]);
+						databaseAllMovies.deleteMovie(params[0]);
 						return null;
 					} 
 

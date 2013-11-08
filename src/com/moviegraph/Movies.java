@@ -21,15 +21,15 @@ public class Movies extends ListActivity {
 	public static final String ROW_ID = "row_id"; // Intent extra key
 	private ListView ratingListView; 
 	private CursorAdapter ratingAdapter;
-    private String buttonClicked;
+    private int listID;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) { 
 
 		super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
-        buttonClicked = intent.getStringExtra("buttonClicked");
+        Bundle extras = getIntent().getExtras();
+        listID = extras.getInt("listID");
 
         ratingListView = getListView();
 		ratingListView.setOnItemClickListener(viewRatingListener);
@@ -83,11 +83,11 @@ public class Movies extends ListActivity {
 
             Cursor movieList = null;
 
-            if(buttonClicked.equals("pending"))
+            if(listID == 0)
                 movieList = databasePending.getAllMovies();
-            else if(buttonClicked.equals("seen"))
+            else if(listID == 1)
                 movieList = databaseSeen.getAllMovies();
-            else if(buttonClicked.equals("all"))
+            else if(listID == 2)
                 movieList = databaseAllMovies.getAllMovies();
 
 			return movieList;
@@ -130,14 +130,15 @@ public class Movies extends ListActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 
-			Log.d("MoiveRater", "postion: " + position + ", id: " + id);
+			Log.d("******MoiveRater", "postion: " + position + ", id: " + id);
 			// create an Intent to launch the ViewRating Activity
-			Intent viewContact =
-					new Intent(Movies.this, ViewRating.class);
+			Intent viewMovieInfo = new Intent(Movies.this, ViewMovieInfo.class);
 
-			// pass the selected contact's row ID as an extra with the Intent
-			viewContact.putExtra(ROW_ID, id);
-			startActivity(viewContact);
+			// pass the selected movie's row ID as an extra with the Intent
+			viewMovieInfo.putExtra(ROW_ID, id);
+            // pass the the id of the movie list: pending, seen, or all
+            viewMovieInfo.putExtra("listID", listID);
+			startActivity(viewMovieInfo);
 		}
 	};
 }

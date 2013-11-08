@@ -14,7 +14,7 @@ public class DatabaseSeen {
     private static final String TAG = "DatabaseConnector";
 
     private static final String DATABASE_NAME = "MovieGraph";
-    private static final String TABLE_NAME = "seen_movies";
+    public static final String TABLE_NAME = "seen_movies";
     private SQLiteDatabase database;
     private DatabaseOpenHelper databaseOpenHelper;
 
@@ -37,10 +37,11 @@ public class DatabaseSeen {
     }
 
     // inserts a new rating into the database
-    public void insertRating(long movieID) {
+    public void insertMovie(long movieID, int buttonID) {
 
         ContentValues newRating = new ContentValues();
         newRating.put("movie_id", movieID);
+        newRating.put("category", buttonID);
 
         open();
         database.insert(TABLE_NAME, null, newRating);
@@ -49,10 +50,10 @@ public class DatabaseSeen {
 
 
     // updates a rating in the database
-    public void updateRating(long id, long movieID) {
+    public void updateMovie(long id, int buttonID) {
 
         ContentValues editRating = new ContentValues();
-        editRating.put("movie_id", movieID);
+        editRating.put("category", buttonID);
 
         open(); 
         database.update(TABLE_NAME, editRating, "_id=" + id, null);
@@ -104,9 +105,9 @@ public class DatabaseSeen {
 
 
     // delete the rating specified by the given id
-    public void deleteRating(long id) {
+    public void deleteMovie(long id) {
         open(); 
-        database.delete(TABLE_NAME, "_id=" + id, null);
+        database.delete(TABLE_NAME, "movie_id=" + id, null);
         close();
     } 
 

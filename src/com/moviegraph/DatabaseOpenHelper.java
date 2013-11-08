@@ -11,10 +11,6 @@ import android.util.Log;
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
-    private static final String TABLE_NAME = "all_movies";
-    private static final String SEEN_MOVIES = "seen_movies";
-    private static final String PENDING_MOVIES = "pending_movies";
-
     public DatabaseOpenHelper(Context context, String name,
                               SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -22,7 +18,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createQuery = "CREATE TABLE " +TABLE_NAME +
+        String createQuery = "CREATE TABLE " + DatabaseAllMovies.TABLE_NAME +
                 "(_id INTEGER PRIMARY KEY autoincrement, " +
                 "name TEXT, " +
                 "mood TEXT, " +
@@ -32,27 +28,22 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
         db.execSQL(createQuery);
 
-        createQuery = "CREATE TABLE " +SEEN_MOVIES +
+        createQuery = "CREATE TABLE " + DatabaseSeen.TABLE_NAME +
                 "(_id INTEGER PRIMARY KEY autoincrement, " +
-                "movie_id TEXT)";
+                "movie_id TEXT, " +
+                "category TEXT)";
 
         db.execSQL(createQuery);
 
-        createQuery = "CREATE TABLE " +PENDING_MOVIES +
+        createQuery = "CREATE TABLE " + DatabasePending.TABLE_NAME +
                 "(_id INTEGER PRIMARY KEY autoincrement, " +
-                "name TEXT, " +
-                "mood TEXT, " +
-                "dateSeen TEXT, " +
-                "tag1 TEXT, " +
-                "tag2 TEXT)";
+                "movie_id TEXT, " +
+                "date_received TEXT)";
 
         db.execSQL(createQuery);
-
-
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion,
-                          int newVersion)
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     { /* nothing to do*/ }
 }
