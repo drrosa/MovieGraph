@@ -34,11 +34,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
         createQuery = "CREATE TABLE " +SEEN_MOVIES +
                 "(_id INTEGER PRIMARY KEY autoincrement, " +
-                "name TEXT, " +
-                "mood TEXT, " +
-                "dateSeen TEXT, " +
-                "tag1 TEXT, " +
-                "tag2 TEXT)";
+                "movie_id TEXT)";
 
         db.execSQL(createQuery);
 

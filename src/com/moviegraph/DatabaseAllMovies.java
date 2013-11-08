@@ -11,7 +11,7 @@ public class DatabaseAllMovies {
     private static final String TAG = "DatabaseConnector";
 
     private static final String DATABASE_NAME = "MovieGraph";
-    private static final String TABLE_NAME = "all_movies";
+    public static final String TABLE_NAME = "all_movies";
     private SQLiteDatabase database;
     private DatabaseOpenHelper databaseOpenHelper;
 
@@ -58,7 +58,7 @@ public class DatabaseAllMovies {
     }
 
     // inserts a new rating into the database
-    public void insertRating(String title,
+    public long insertRating(String title,
             String mood, String dateSeen, String tag1, String tag2) {
 
         ContentValues newRating = new ContentValues();
@@ -69,8 +69,10 @@ public class DatabaseAllMovies {
         newRating.put("tag2", tag2);
 
         open();
-        database.insert(TABLE_NAME, null, newRating);
+        long rowID = database.insert(TABLE_NAME, null, newRating);
         close();
+
+        return rowID;
     }
 
 

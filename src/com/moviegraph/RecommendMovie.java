@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,10 +38,10 @@ public class RecommendMovie extends Activity {
 
         // if there are extras, use them to populate the EditTexts
         if (extras != null) {
-            rowID = extras.getLong("row_id");
+            rowID = extras.getLong("_id");
             title.setText(extras.getString("name"));
             dateSeen.setText(extras.getString("dateSeen"));
-            genre.setText(extras.getString("genre"));
+            genre.setText(extras.getString("mood"));
             tag1.setText(extras.getString("tag1"));
             tag2.setText(extras.getString("tag2"));
         } // end if
@@ -105,7 +106,7 @@ public class RecommendMovie extends Activity {
                 databaseAllMovies.populateMoviesDB();
             }
 
-            databaseAllMovies.insertRating(
+            rowID = databaseAllMovies.insertRating(
                     title.getText().toString(),
                     genre.getText().toString(),
                     dateSeen.getText().toString(),
@@ -113,25 +114,11 @@ public class RecommendMovie extends Activity {
                     tag2.getText().toString());
 
 //            int id= databaseAllMovies.getMovieId(title.getText().toString()).getInt(0);
-            databaseSeen.insertRating(
-                    title.getText().toString(),
-                    genre.getText().toString(),
-                    dateSeen.getText().toString(),
-                    tag1.getText().toString(),
-                    tag2.getText().toString());
+            databaseSeen.insertRating(rowID);
 
         }
         else {
             databaseAllMovies.updateRating(rowID,
-                    title.getText().toString(),
-                    genre.getText().toString(),
-                    dateSeen.getText().toString(),
-                    tag1.getText().toString(),
-                    tag2.getText().toString());
-
-
-
-            databaseSeen.updateRating(rowID,
                     title.getText().toString(),
                     genre.getText().toString(),
                     dateSeen.getText().toString(),
