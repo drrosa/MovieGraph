@@ -9,6 +9,8 @@ import android.view.View;
 
 public class MainMenu extends Activity {
 
+    //    TODO: LISTID constants
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 

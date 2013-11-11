@@ -35,18 +35,19 @@ public class DatabaseAllMovies {
 
 
 
-    public void populateMoviesDB(){
-        insertMovie("Batman: The Dark Knight", "Action", "A", "B");
-        insertMovie("The Lord of The Rings: The Return of the King", "Fantasy", "A", "B");
-        insertMovie("Teletubies", "Horror", "A", "B");
-        insertMovie("David esta Perdido", "Suspense", "A", "B");
-        insertMovie("Norman the Great", "Documentary", "A", "B");
-        insertMovie("Falling Skies", "Action", "A", "B");
-        insertMovie("The Walking Dead: The Movie", "Action", "A", "B");
-        insertMovie("Dragon Ball Z", "Action", "A", "B");
-        insertMovie("WAAAzup!!!", "Comedy", "A", "B");
+    public Long[] populateMoviesDB(){
+        Long[] dbs = new Long[9];
+        dbs[0] = insertMovie("Batman: The Dark Knight", "Action", "A", "B");
+        dbs[1] = insertMovie("The Lord of The Rings: The Return of the King", "Fantasy", "A", "B");
+        dbs[2] = insertMovie("Teletubies", "Horror", "A", "B");
+        dbs[3] = insertMovie("David esta Perdido", "Suspense", "A", "B");
+        dbs[4] = insertMovie("Norman the Great", "Documentary", "A", "B");
+        dbs[5] = insertMovie("Falling Skies", "Action", "A", "B");
+        dbs[6] = insertMovie("The Walking Dead: The Movie", "Action", "A", "B");
+        dbs[7] = insertMovie("Dragon Ball Z", "Action", "A", "B");
+        dbs[8] = insertMovie("WAAAzup!!!", "Comedy", "A", "B");
 
-
+        return dbs;
     }
 
     // get a Cursor containing information about the movie specified

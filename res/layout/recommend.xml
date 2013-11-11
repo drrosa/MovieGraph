@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:orientation="vertical" >
+              android:orientation="vertical"
+        >
 
         <EditText
             android:id="@+id/titleEditText"
@@ -49,9 +50,18 @@
             android:id="@+id/moodEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/mood"
+            android:hint="@string/label_mood"
             android:imeOptions="actionNext"
             android:inputType="textCapWords|textAutoComplete" >
+        </EditText>
+
+        <EditText
+                android:id="@+id/datSeenEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/label_date_seen"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords|textAutoComplete" >
         </EditText>
 
         <EditText
@@ -73,12 +83,12 @@
         </EditText>
 
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:text="@string/button_submit"
+            android:text="@string/button_send"
             android:textSize="30sp" >
         </Button>
 

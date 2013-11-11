@@ -17,13 +17,13 @@
 
             <TextView
                 android:id="@+id/nameLabelTextView"
-                style="@style/RatingLabelTextView"
+                style="@style/MovieLabelTextView"
                 android:text="@string/label_name" >
             </TextView>
 
             <TextView
                 android:id="@+id/nameTextView"
-                style="@style/RatingTextView" >
+                style="@style/MovieTextView" >
             </TextView>
         </TableRow>
     </TableLayout>
@@ -83,13 +83,13 @@
 
             <TextView
                 android:id="@+id/moodLabelTextView"
-                style="@style/RatingLabelTextView"
-                android:text="@string/mood" >
+                style="@style/MovieLabelTextView"
+                android:text="@string/label_mood" >
             </TextView>
 
             <TextView
                 android:id="@+id/genreTextView"
-                style="@style/RatingTextView" >
+                style="@style/MovieTextView" >
             </TextView>
         </TableRow>
 
@@ -99,14 +99,14 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/dateSeetLabelTextView"
-                style="@style/RatingLabelTextView"
+                android:id="@+id/dateSeenLabelTextView"
+                style="@style/MovieLabelTextView"
                 android:text="@string/label_date_seen" >
             </TextView>
 
             <TextView
                 android:id="@+id/dateSeenTextView"
-                style="@style/RatingTextView" >
+                style="@style/MovieTextView" >
             </TextView>
         </TableRow>
 
@@ -117,13 +117,13 @@
 
             <TextView
                 android:id="@+id/tag1LabelTextView"
-                style="@style/RatingLabelTextView"
+                style="@style/MovieLabelTextView"
                 android:text="@string/label_tag1" >
             </TextView>
 
             <TextView
                 android:id="@+id/tag1TextView"
-                style="@style/RatingTextView" >
+                style="@style/MovieTextView" >
             </TextView>
         </TableRow>
 
@@ -134,13 +134,13 @@
 
             <TextView
                 android:id="@+id/tag2LabelTextView"
-                style="@style/RatingLabelTextView"
+                style="@style/MovieLabelTextView"
                 android:text="@string/label_tag2" >
             </TextView>
 
             <TextView
                 android:id="@+id/tag2TextView"
-                style="@style/RatingTextView" >
+                style="@style/MovieTextView" >
             </TextView>
         </TableRow>
     </TableLayout>

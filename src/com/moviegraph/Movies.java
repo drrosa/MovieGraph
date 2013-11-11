@@ -37,12 +37,12 @@ public class Movies extends ListActivity {
 		// map each ratings's name to a TextView
 		// in the ListView layout
 		String[] from = new String[] { "name" };
-		int[] to = new int[] { R.id.ratingTextView };
+		int[] to = new int[] { R.id.movieTextView};
 
 		ratingAdapter = new SimpleCursorAdapter(
 				Movies.this,
 				R.layout.movie_list_item, null,
-				from, to);
+				from, to, 0);
 
 		setListAdapter(ratingAdapter); 
 	}
@@ -60,8 +60,8 @@ public class Movies extends ListActivity {
 	protected void onStop() {
 		Cursor cursor = ratingAdapter.getCursor(); 
 
-		if (cursor != null) 
-			cursor.deactivate(); // deactivate it
+		if (cursor != null)
+			cursor.close(); // deactivate it
 
 		ratingAdapter.changeCursor(null); // adapter now has no Cursor
 		super.onStop();
@@ -109,7 +109,7 @@ public class Movies extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.movie_rating_menu, menu);
+		inflater.inflate(R.menu.movie_movie_menu, menu);
 		return true;
 	}
 
@@ -135,7 +135,7 @@ public class Movies extends ListActivity {
 			Intent viewMovieInfo = new Intent(Movies.this, ViewMovieInfo.class);
 
 			// pass the selected movie's row ID as an extra with the Intent
-			viewMovieInfo.putExtra(ROW_ID, id);
+			viewMovieInfo.putExtra("_id", id);
             // pass the the id of the movie list: pending, seen, or all
             viewMovieInfo.putExtra("listID", listID);
 			startActivity(viewMovieInfo);

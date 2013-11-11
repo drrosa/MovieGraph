@@ -56,7 +56,7 @@ public class DatabaseSeen {
         editRating.put("category", buttonID);
 
         open(); 
-        database.update(TABLE_NAME, editRating, "_id=" + id, null);
+        database.update(TABLE_NAME, editRating, "movie_id=" + id, null);
         close(); 
     }
 
@@ -96,7 +96,7 @@ public class DatabaseSeen {
     // by the given id
     public Cursor getOneRating(long id) {
         return database.query(
-                TABLE_NAME, null, "_id=" + id, null, null, null, null);
+                TABLE_NAME, null, "movie_id=" + id, null, null, null, null);
 
         // public Cursor query (String table, String[] columns, 
         // String selection, String[] selectionArgs, String groupBy, 
@@ -104,7 +104,7 @@ public class DatabaseSeen {
     }
 
 
-    // delete the rating specified by the given id
+    // delete the movie specified by the given id
     public void deleteMovie(long id) {
         open(); 
         database.delete(TABLE_NAME, "movie_id=" + id, null);

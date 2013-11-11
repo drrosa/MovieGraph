@@ -52,7 +52,7 @@ public class DatabasePending {
 //        editRating.put();
 
         open(); 
-        database.update(TABLE_NAME, editRating, "_id=" + id, null);
+        database.update(TABLE_NAME, editRating, "movie_id=" + id, null);
         close(); 
     }
 
@@ -71,6 +71,7 @@ public class DatabasePending {
     }
 
     public Cursor getAllMovies() {
+//      TODO: Use String Builder
         String[] selectionArgs =  getAllMovieIds();
         String selection = "_id IN(?";
 
@@ -91,7 +92,7 @@ public class DatabasePending {
     // by the given id
     public Cursor getOneRating(long id) {
         return database.query(
-                TABLE_NAME, null, "_id=" + id, null, null, null, null);
+                TABLE_NAME, null, "movie_id=" + id, null, null, null, null);
 
         // public Cursor query (String table, String[] columns, 
         // String selection, String[] selectionArgs, String groupBy, 

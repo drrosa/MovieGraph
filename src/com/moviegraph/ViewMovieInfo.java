@@ -7,12 +7,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 public class ViewMovieInfo extends Activity {
 
@@ -30,7 +31,7 @@ public class ViewMovieInfo extends Activity {
 		super.onCreate(savedInstanceState);
         // get the selected rating's row ID
         Bundle extras = getIntent().getExtras();
-        rowID = extras.getLong(Movies.ROW_ID);
+        rowID = extras.getLong("_id");
         listID = extras.getInt("listID");
 
         switch(listID){
@@ -110,24 +111,24 @@ public class ViewMovieInfo extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.view_rating_menu, menu);
+		inflater.inflate(R.menu.view_movie_menu, menu);
 		return true;
 	}
 
     public void onMustSeeClick(View view){
-        asyncTask().execute(new Long[] { rowID, 0L });
+        asyncTask().execute(new Object[]{rowID, 0});
     }
 
     public void onRecommendedClick(View view){
-        asyncTask().execute(new Long[] { rowID, 1L });
+        asyncTask().execute(new Object[] { rowID, 1 });
     }
 
     public void onWorthWatchingClick(View view){
-        asyncTask().execute(new Long[]{rowID, 2L});
+        asyncTask().execute(new Object[]{rowID, 2});
     }
 
     public void onNotSeenClick(View view){
-        asyncTask().execute(new Long[]{rowID, 3L});
+        asyncTask().execute(new Object[]{rowID, 3});
     }
 
     private final DatabaseSeen databaseSeen = new DatabaseSeen(ViewMovieInfo.this);
@@ -135,15 +136,14 @@ public class ViewMovieInfo extends Activity {
 
 
     public AsyncTask asyncTask(){
-
-
-        AsyncTask<Long, Object, Object> moveMovieTask =
-                new AsyncTask<Long, Object, Object>() {
+//      TODO: Use a LoaderManager with a CursorLoader
+        AsyncTask<Object, Object, Object> moveMovieTask =
+                new AsyncTask<Object, Object, Object>() {
 
                     @Override
-                    protected Object doInBackground(Long... params) {
-                        Long rowID = params[0];
-                        int buttonID = params[1].intValue();
+                    protected Object doInBackground(Object... params) {
+                        Long rowID = (Long)params[0];
+                        int buttonID = (Integer)params[1];
                         switch (listID){
                             case 0: // Not Seen
                                 databaseSeen.insertMovie(rowID, buttonID);
@@ -184,7 +184,7 @@ public class ViewMovieInfo extends Activity {
 			    new Intent(this, RecommendMovie.class);
 
 			// pass the selected rating's data as extras with the Intent
-			recommendMovie.putExtra(Movies.ROW_ID, rowID);
+			recommendMovie.putExtra("_id", rowID);
 			recommendMovie.putExtra("name", name.getText());
 			recommendMovie.putExtra("mood", mood.getText());
 			recommendMovie.putExtra("dateSeen", dateSeen.getText());
@@ -194,7 +194,7 @@ public class ViewMovieInfo extends Activity {
 			return true;
 
 		case R.id.deleteItem:
-			deleteRating();
+			deleteMovie();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -203,7 +203,7 @@ public class ViewMovieInfo extends Activity {
 
 
 	// delete a rating
-	private void deleteRating() {
+	private void deleteMovie() {
 		// create a new AlertDialog Builder
 		AlertDialog.Builder builder = 
 				new AlertDialog.Builder(ViewMovieInfo.this);

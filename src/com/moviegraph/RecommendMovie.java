@@ -21,6 +21,7 @@ public class RecommendMovie extends Activity {
     private EditText tag1;
     private EditText tag2;
     private int buttonID;
+//    TODO: BUTTONID constants
 
     // called when the Activity is first started
     @Override
@@ -30,6 +31,7 @@ public class RecommendMovie extends Activity {
 
         title = (EditText) findViewById(R.id.titleEditText);
         mood = (EditText) findViewById(R.id.moodEditText);
+        dateSeen = (EditText) findViewById(R.id.datSeenEditText);
         tag1 = (EditText) findViewById(R.id.tag1EditText);
         tag2 = (EditText) findViewById(R.id.tag2EditText);
 
@@ -47,7 +49,7 @@ public class RecommendMovie extends Activity {
 
         // set event listener for the Save Rating Button
         Button submitButton =
-                (Button) findViewById(R.id.submit);
+                (Button) findViewById(R.id.send);
         submitButton.setOnClickListener(saveRatingButtonClicked);
     }
 
@@ -112,8 +114,9 @@ public class RecommendMovie extends Activity {
             // insert the rating information into the database
 
             //If user types "populate" the database will get populated with test data.
-            if(title.getText().toString().equals("populate")){
-                databaseAllMovies.populateMoviesDB();
+            if(title.getText().toString().equals("Populate")){
+                for(Long rowID: databaseAllMovies.populateMoviesDB())
+                    databaseSeen.insertMovie(rowID, buttonID);
             }
 
             rowID = databaseAllMovies.insertMovie(
