@@ -42,6 +42,14 @@
     <string name="errorTitle">Movie Name is Required</string>
     <string name="errorMessage">You must enter a movie name</string>
 
+
+    <string name="menuitem_LogoutItem">Logout</string>
+
+
+
+    <string name="errorConfirmation">Confirmation does not match password</string>
+    <string name="errorMessage_password_confirmation">Your password and password confirmation must match</string>
+
     <string name="errorEmail">Email is Required</string>
     <string name="errorMessage_email">You must enter a valid email</string>
 

@@ -116,9 +116,17 @@ public class Movies extends ListActivity {
 	// handle choice from options menu
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+
+        Intent addNewContact=new Intent();
 		// create a new Intent to launch
-		Intent addNewContact = 
-				new Intent(this, RecommendMovie.class);
+       if(item.getItemId()==R.id.LogoutItem){
+           addNewContact =
+                   new Intent(this, WelcomeScreen.class);
+       }else {
+            addNewContact =
+                   new Intent(this, RecommendMovie.class);
+       }
+
 		startActivity(addNewContact); 
 		return super.onOptionsItemSelected(item); 
 	}
