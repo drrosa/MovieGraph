@@ -28,6 +28,8 @@ public class RecommendMovie extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recommend);
+//        SharedPreferences prefs = this.getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
+//        String email = prefs.getString("email", null);
 
         title = (EditText) findViewById(R.id.titleEditText);
         mood = (EditText) findViewById(R.id.moodEditText);

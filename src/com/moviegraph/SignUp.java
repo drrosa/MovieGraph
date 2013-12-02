@@ -21,9 +21,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -146,38 +143,6 @@ public class SignUp extends Activity {
     }
 
 
-    private void saveProfile() {
-
-        Log.d(TAG, "profile inserted");
-//		// get DatabaseConnector to interact with the SQLite database
-//
-//
-//		Log.d(TAG, "profile inserted into DB: " + (rating.getRating() * 2));
-        Statement stmt = null;
-        Connection con = null;
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(url, user, pass);
-            /* System.out.println("Database connection success"); */
-
-            Log.d("Android", "Database connection success");
-
-
-            stmt = con.createStatement();
-
-//            String sql = "use flipbook;";
-//            stmt.executeUpdate(sql);
-
-           String sql = "insert into profiles(email, password)values ('" +this.email.getText().toString()+"','"+ this.password.getText().toString()+"');";
-            stmt.executeUpdate(sql);
-
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private static final String url = "jdbc:mysql://173.194.107.132:3306/flipbook";
     private static final String user = "root";
     private static final String pass = "root";
@@ -195,7 +160,7 @@ public class SignUp extends Activity {
 //http post
             try{
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://www.cs.utexas.edu/~nel349/getAllPeopleBornAfter.php");
+                HttpPost httppost = new HttpPost("http://www.cs.utexas.edu/~nel349/moviegraph/signup.php");
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(httppost);
                 HttpEntity entity = response.getEntity();
