@@ -37,7 +37,7 @@
         android:layout_width="195dp"
         android:layout_height="40dp"
         android:layout_margin="10dp"
-        android:text="@string/button_have_not_seen"
+        android:text="@string/button_have_not_watched"
         android:onClick="onNotSeenClick"
     />
 

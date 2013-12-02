@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class RecommendMovie extends Activity {
 
@@ -17,10 +18,12 @@ public class RecommendMovie extends Activity {
 
     private EditText title;
     private EditText mood;
-    private EditText dateSeen;
+    private TextView dateSeen;
     private EditText tag1;
     private EditText tag2;
     private int buttonID;
+
+
 //    TODO: BUTTONID constants
 
     // called when the Activity is first started
@@ -31,7 +34,7 @@ public class RecommendMovie extends Activity {
 
         title = (EditText) findViewById(R.id.titleEditText);
         mood = (EditText) findViewById(R.id.moodEditText);
-        dateSeen = (EditText) findViewById(R.id.datSeenEditText);
+        dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
         tag1 = (EditText) findViewById(R.id.tag1EditText);
         tag2 = (EditText) findViewById(R.id.tag2EditText);
 

@@ -5,6 +5,26 @@
               android:orientation="vertical"
         >
 
+    <TextView
+        android:id="@+id/screen_suggest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/screen_suggest"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        />
+
+        <EditText
+            android:id="@+id/titleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_send_to"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords" >
+        </EditText>
+
         <EditText
             android:id="@+id/titleEditText"
             android:layout_width="match_parent"
@@ -15,6 +35,7 @@
         </EditText>
 
         <LinearLayout android:id="@+id/liked_buttons"
+                      android:visibility="gone"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content">
             <Button
@@ -50,22 +71,26 @@
             android:id="@+id/moodEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/label_mood"
+            android:hint="@string/label_select_mood"
             android:imeOptions="actionNext"
             android:inputType="textCapWords|textAutoComplete" >
         </EditText>
 
-        <EditText
-                android:id="@+id/datSeenEditText"
+        <TextView
+                android:id="@+id/dateSeenTextView"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/label_date_seen"
                 android:imeOptions="actionNext"
-                android:inputType="textCapWords|textAutoComplete" >
-        </EditText>
+                android:inputType="date"
+                style="@style/MovieTextView"
+                android:onClick="chooseDate" >
+        </TextView>
 
         <EditText
             android:id="@+id/tag1EditText"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_tag1"
@@ -75,6 +100,7 @@
 
         <EditText
             android:id="@+id/tag2EditText"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/label_tag2"

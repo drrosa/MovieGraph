@@ -7,11 +7,17 @@ package com.moviegraph;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 //TODO: COLUMN_NAME String constants
 
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
+
+    public static final String
+            NAME = "name",
+            MOOD = "mood",
+            DATE_SEEN = "dateSeen",
+            TAG1 = "tag1",
+            TAG2 = "tag2";
 
     public DatabaseOpenHelper(Context context, String name,
                               SQLiteDatabase.CursorFactory factory, int version) {

@@ -4,6 +4,17 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/screen_watched"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/button_watched"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +29,7 @@
             <TextView
                 android:id="@+id/nameLabelTextView"
                 style="@style/MovieLabelTextView"
-                android:text="@string/label_name" >
+                android:text="@string/label_movie_title" >
             </TextView>
 
             <TextView
@@ -28,47 +39,7 @@
         </TableRow>
     </TableLayout>
 
-    <LinearLayout android:id="@+id/liked_buttons"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content">
-        <Button
-                android:id="@+id/must_see"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:text="@string/button_must_see"
-                android:onClick="onMustSeeClick"
-                />
 
-        <Button
-                android:id="@+id/recommended"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:text="@string/button_recommended"
-                android:onClick="onRecommendedClick"
-                />
-
-        <Button
-                android:id="@+id/worth_watching"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:text="@string/button_worth_watching"
-                android:onClick="onWorthWatchingClick"
-                />
-
-    </LinearLayout>
-
-    <Button
-            android:id="@+id/haven_not_seen"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_below="@id/liked_buttons"
-            android:text="@string/button_have_not_seen"
-            android:onClick="onNotSeenClick"
-    />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -87,10 +58,10 @@
                 android:text="@string/label_mood" >
             </TextView>
 
-            <TextView
-                android:id="@+id/genreTextView"
+            <EditText
+                android:id="@+id/moodTextView"
                 style="@style/MovieTextView" >
-            </TextView>
+            </EditText>
         </TableRow>
 
         <TableRow
@@ -106,12 +77,16 @@
 
             <TextView
                 android:id="@+id/dateSeenTextView"
-                style="@style/MovieTextView" >
+                android:imeOptions="actionNext"
+                android:inputType="date"
+                style="@style/MovieTextView"
+                android:onClick="chooseDate" >
             </TextView>
         </TableRow>
 
         <TableRow
             android:id="@+id/tag1TableRow"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
@@ -129,6 +104,7 @@
 
         <TableRow
             android:id="@+id/tag2TableRow"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
@@ -143,6 +119,48 @@
                 style="@style/MovieTextView" >
             </TextView>
         </TableRow>
-    </TableLayout>
 
+    </TableLayout>
+    <LinearLayout android:id="@+id/liked_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/must_see"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:text="@string/button_must_see"
+            android:onClick="onMustSeeClick"
+            />
+
+        <Button
+            android:id="@+id/recommended"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:text="@string/button_recommended"
+            android:onClick="onRecommendedClick"
+            />
+
+        <Button
+            android:id="@+id/worth_watching"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/button_worth_watching"
+            android:onClick="onWorthWatchingClick"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/haven_not_seen"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:layout_below="@id/liked_buttons"
+        android:text="@string/button_have_not_watched"
+        android:onClick="onNotSeenClick"
+        />
 </LinearLayout>
