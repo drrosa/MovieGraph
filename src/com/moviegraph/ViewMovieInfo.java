@@ -253,7 +253,7 @@ public class ViewMovieInfo extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.editItem:
+		case R.id.sendMovie:
 			// create an Intent to launch the AddEditRating Activity
 			Intent recommendMovie =
 			    new Intent(this, RecommendMovie.class);

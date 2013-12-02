@@ -34,7 +34,7 @@
     <string name="button_watched">I\'ve watched…</string>
     <string name="button_all_movies">All Movies</string>
     <string name="menuitem_add_movie">Add Movie</string>
-    <string name="menuitem_edit_movie">Edit Movie</string>
+    <string name="menuitem_send_movie">Send Movie</string>
     <string name="menuitem_delete_movie">Delete Movie</string>
     <string name="confirmTitle">Are You Sure?</string>
     <string name="confirmMessage">This will permanently delete the movie</string>

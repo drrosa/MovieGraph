@@ -12,8 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.io.File;
-
 
 public class MainMenu extends Activity {
 
@@ -62,7 +60,7 @@ public class MainMenu extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu_menu, menu);
+        inflater.inflate(R.menu.main_options_menu, menu);
         return true;
     }
 
@@ -70,23 +68,16 @@ public class MainMenu extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-                        //The only item is Lougout so it will delete preferences
+        //The only item is Lougout so it will delete preferences
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.commit();
 
-                String email = prefs.getString("email", null);
-                Log.d("Session", "SharedPreferences exist, email= "+ email);
+        String email = prefs.getString("email", null);
+        Log.d("Session", "SharedPreferences exist, email= "+ email);
 
-        Intent addNewContact;
-        // create a new Intent to launch
-
-            addNewContact =
-                    new Intent(this, WelcomeScreen.class);
-
-
-        startActivity(addNewContact);
+        startActivity(new Intent(this, WelcomeScreen.class));
         return super.onOptionsItemSelected(item);
     }
 

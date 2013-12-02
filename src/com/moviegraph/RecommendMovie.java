@@ -109,37 +109,23 @@ public class RecommendMovie extends Activity {
     }
 
     private void saveMovie() {
-        // get DatabaseConnector to interact with the SQLite database
-        DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(this);
 
+        DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(this);
         DatabaseSeen databaseSeen = new DatabaseSeen(this);
 
-
-        if (getIntent().getExtras() == null) {
-            // insert the rating information into the database
-
             //If user types "populate" the database will get populated with test data.
-            if(title.getText().toString().equals("Populate")){
+            if(title.getText().toString().equals("Pop")){
                 for(Long rowID: databaseAllMovies.populateMoviesDB())
                     databaseSeen.insertMovie(rowID, buttonID);
             }
+            else{
+                rowID = databaseAllMovies.insertMovie(
+                        title.getText().toString(),
+                        mood.getText().toString(),
+                        tag1.getText().toString(),
+                        tag2.getText().toString());
 
-            rowID = databaseAllMovies.insertMovie(
-                    title.getText().toString(),
-                    mood.getText().toString(),
-                    tag1.getText().toString(),
-                    tag2.getText().toString());
-
-            databaseSeen.insertMovie(rowID, buttonID);
-
-        }
-        else {
-            databaseAllMovies.updateMovie(rowID,
-                    title.getText().toString(),
-                    mood.getText().toString(),
-                    dateSeen.getText().toString(),
-                    tag1.getText().toString(),
-                    tag2.getText().toString());
-        }
+                databaseSeen.insertMovie(rowID, buttonID);
+            }
     }
 }

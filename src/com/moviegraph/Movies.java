@@ -109,7 +109,7 @@ public class Movies extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.movie_movie_menu, menu);
+		inflater.inflate(R.menu.main_options_menu, menu);
 		return true;
 	}
 
@@ -117,17 +117,15 @@ public class Movies extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-        Intent addNewContact=new Intent();
+        Intent screen =new Intent();
 		// create a new Intent to launch
        if(item.getItemId()==R.id.LogoutItem){
-           addNewContact =
-                   new Intent(this, WelcomeScreen.class);
+           screen = new Intent(this, WelcomeScreen.class);
        }else {
-            addNewContact =
-                   new Intent(this, RecommendMovie.class);
+            screen = new Intent(this, RecommendMovie.class);
        }
 
-		startActivity(addNewContact); 
+		startActivity(screen);
 		return super.onOptionsItemSelected(item); 
 	}
 
