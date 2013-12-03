@@ -6,22 +6,28 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-public class RecommendMovie extends Activity {
+public class RecommendMovie extends Activity
+        implements AdapterView.OnItemSelectedListener{
 
     private static final String TAG = "RecommendMovie";
 
     private long rowID;
 
     private EditText title;
-    private EditText mood;
+    private TextView mood;
     private TextView dateSeen;
     private EditText tag1;
     private EditText tag2;
     private int buttonID;
+
+    private static final String[] moodList ={"Select Mood", "lorem", "ipsum", "dolor"};
 
 
 //    TODO: BUTTONID constants
@@ -35,7 +41,7 @@ public class RecommendMovie extends Activity {
 //        String email = prefs.getString("email", null);
 
         title = (EditText) findViewById(R.id.titleEditText);
-        mood = (EditText) findViewById(R.id.moodEditText);
+        mood = (TextView) findViewById(R.id.moodTextView);
         dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
         tag1 = (EditText) findViewById(R.id.tag1EditText);
         tag2 = (EditText) findViewById(R.id.tag2EditText);
@@ -53,9 +59,27 @@ public class RecommendMovie extends Activity {
         } // end if
 
         // set event listener for the Save Rating Button
-        Button submitButton =
+        Button sendButton =
                 (Button) findViewById(R.id.send);
-        submitButton.setOnClickListener(saveRatingButtonClicked);
+        sendButton.setOnClickListener(saveRatingButtonClicked);
+
+        Spinner spin = (Spinner)findViewById(R.id.spinner);
+        spin.setOnItemSelectedListener(this);
+
+        ArrayAdapter<String> moodDropdownList = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, moodList);
+        moodDropdownList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(moodDropdownList);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+        mood.setText(moodList[position]);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        mood.setText("");
     }
 
     // responds to event generated when user clicks the Done Button
