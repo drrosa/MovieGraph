@@ -17,30 +17,14 @@ import java.io.File;
 
 public class MainMenu extends Activity {
 
-
-    String email;
-    SharedPreferences prefs;
-    boolean logout=false;
-
     //    TODO: LISTID constants
-
+    SharedPreferences prefs;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-        if(savedInstanceState != null) {
-           email=savedInstanceState.getString("email");
-        }
-        else{
-            prefs = this.getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
-            email = prefs.getString("email", email);
-        }
-
-
-
-
-        Log.d("Session", "SharedPreferences exist, email= "+ email);
+		super.onCreate(savedInstanceState);
+        prefs = this.getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
+//        String email = prefs.getString("email", null);
+//        Log.d("Session", "SharedPreferences exist, email= "+ email);
 		setContentView(R.layout.main_menu);
 	}
 
@@ -71,11 +55,7 @@ public class MainMenu extends Activity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("email", email);
-    }
+
 
     // create the Activity's menu from a menu resource XML file
     @Override
@@ -91,12 +71,11 @@ public class MainMenu extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
                         //The only item is Lougout so it will delete preferences
-        logout=true;
+
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.commit();
 
-//Used to check if logout clears the shared preferences when logout.
                 String email = prefs.getString("email", null);
                 Log.d("Session", "SharedPreferences exist, email= "+ email);
 
@@ -110,46 +89,6 @@ public class MainMenu extends Activity {
         startActivity(addNewContact);
         return super.onOptionsItemSelected(item);
     }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if(!logout){
-            SharedPreferences prefs = getSharedPreferences("myPreferences", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("email", email);
-            editor.putString("lastActivity", getClass().getName());
-
-            String lastactivity= prefs.getString("lastActivity", null);
-            Log.d("Session", "lastActivity = "+ lastactivity);
-            editor.commit();
-        }
-        logout=false;
-
-
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();  // Always call the superclass method first
-
-        if(!logout){
-            SharedPreferences prefs = getSharedPreferences("myPreferences", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("email", email);
-            editor.putString("lastActivity", getClass().getName());
-
-            String lastactivity= prefs.getString("lastActivity", null);
-            Log.d("Session", "lastActivity = "+ lastactivity);
-            editor.commit();
-        }
-        logout=false;
-        // Save the note's current draft, because the activity is stopping
-        // and we want to be sure the current note progress isn't lost.
-
-    }
-
 
 }
 

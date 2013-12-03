@@ -77,11 +77,11 @@ public class DatabaseAllMovies {
 
 
     // updates a rating in the database
-    public void updateMovie(long id, String name,
+    public void updateMovie(long id, String title,
                             String mood, String dateSeen, String tag1, String tag2) {
 
         ContentValues editRating = new ContentValues();
-        editRating.put("name", name);
+        editRating.put("name", title);
         editRating.put("mood", mood);
         editRating.put("dateSeen", dateSeen);
         editRating.put("tag1", tag1);

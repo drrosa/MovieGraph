@@ -4,24 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.io.InputStream;
-import java.util.ArrayList;
+import android.widget.TextView;
 
 public class RecommendMovie extends Activity {
 
@@ -29,13 +16,14 @@ public class RecommendMovie extends Activity {
 
     private long rowID;
 
-    private AutoCompleteTextView To;
     private EditText title;
     private EditText mood;
-    private EditText dateSeen;
+    private TextView dateSeen;
     private EditText tag1;
     private EditText tag2;
     private int buttonID;
+
+
 //    TODO: BUTTONID constants
 
     // called when the Activity is first started
@@ -46,10 +34,9 @@ public class RecommendMovie extends Activity {
 //        SharedPreferences prefs = this.getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
 //        String email = prefs.getString("email", null);
 
-        To= (AutoCompleteTextView) findViewById(R.id.To);
         title = (EditText) findViewById(R.id.titleEditText);
         mood = (EditText) findViewById(R.id.moodEditText);
-        dateSeen = (EditText) findViewById(R.id.datSeenEditText);
+        dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
         tag1 = (EditText) findViewById(R.id.tag1EditText);
         tag2 = (EditText) findViewById(R.id.tag2EditText);
 
@@ -57,8 +44,6 @@ public class RecommendMovie extends Activity {
 
         // if there are extras, use them to populate the EditTexts
         if (extras != null) {
-            To.setText(extras.getString("name"));
-            dateSeen.setText(extras.getString("dateSeen"));  ///Check
             rowID = extras.getLong("_id");
             title.setText(extras.getString("name"));
             dateSeen.setText(extras.getString("dateSeen"));
@@ -66,16 +51,6 @@ public class RecommendMovie extends Activity {
             tag1.setText(extras.getString("tag1"));
             tag2.setText(extras.getString("tag2"));
         } // end if
-
-
-        // Get a reference to the AutoCompleteTextView in the layout
-        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.To);
-// Get the string array
-        String[] countries = getResources().getStringArray(R.array.countries_array);
-// Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
-        textView.setAdapter(adapter);
 
         // set event listener for the Save Rating Button
         Button submitButton =
@@ -134,61 +109,23 @@ public class RecommendMovie extends Activity {
     }
 
     private void saveMovie() {
-        // get DatabaseConnector to interact with the SQLite database
-        DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(this);
 
+        DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(this);
         DatabaseSeen databaseSeen = new DatabaseSeen(this);
 
-
-        if (getIntent().getExtras() == null) {
-            // insert the rating information into the database
-
             //If user types "populate" the database will get populated with test data.
-            if(title.getText().toString().equals("Populate")){
+            if(title.getText().toString().equals("Pop")){
                 for(Long rowID: databaseAllMovies.populateMoviesDB())
                     databaseSeen.insertMovie(rowID, buttonID);
             }
+            else{
+                rowID = databaseAllMovies.insertMovie(
+                        title.getText().toString(),
+                        mood.getText().toString(),
+                        tag1.getText().toString(),
+                        tag2.getText().toString());
 
-            rowID = databaseAllMovies.insertMovie(
-                    title.getText().toString(),
-                    mood.getText().toString(),
-                    tag1.getText().toString(),
-                    tag2.getText().toString());
-
-            databaseSeen.insertMovie(rowID, buttonID);
-
-        }
-        else {
-            databaseAllMovies.updateMovie(rowID,
-                    title.getText().toString(),
-                    mood.getText().toString(),
-                    dateSeen.getText().toString(),
-                    tag1.getText().toString(),
-                    tag2.getText().toString());
-        }
-
-
-        String result = "";
-//the year data to send
-        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-        nameValuePairs.add(new BasicNameValuePair("To",To.getText().toString()));
-        nameValuePairs.add(new BasicNameValuePair("email",this.getSharedPreferences("myPreferences", MODE_PRIVATE).getString("email", null)));
-        nameValuePairs.add(new BasicNameValuePair("title",title.getText().toString()));
-        nameValuePairs.add(new BasicNameValuePair("mood",mood.getText().toString()));
-        nameValuePairs.add(new BasicNameValuePair("date_seen",dateSeen.getText().toString()));
-
-
-        InputStream is = null;
-//http post
-        try{
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://www.cs.utexas.edu/~nel349/moviegraph/recommend.php");
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-            is = entity.getContent();
-        }catch(Exception e){
-            Log.e("log_tag", "Error in http connection " + e.toString());
-        }
+                databaseSeen.insertMovie(rowID, buttonID);
+            }
     }
 }

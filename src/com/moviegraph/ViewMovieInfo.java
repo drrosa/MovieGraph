@@ -2,28 +2,35 @@ package com.moviegraph;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 public class ViewMovieInfo extends Activity {
 
 	private long rowID; 
-	private TextView name; 
+	private TextView title;
 	private TextView mood;
 	private TextView dateSeen; 
 	private TextView tag1;
 	private TextView tag2;
     private int listID;
 
-	// called when the activity is first created
+    private Calendar date = Calendar.getInstance();
+
+    // called when the activity is first created
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,8 +49,8 @@ public class ViewMovieInfo extends Activity {
         }
 
 
-		name = (TextView) findViewById(R.id.nameTextView);
-		mood = (TextView) findViewById(R.id.genreTextView);
+		title = (TextView) findViewById(R.id.nameTextView);
+		mood = (TextView) findViewById(R.id.moodTextView);
 		dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
 		tag1 = (TextView) findViewById(R.id.tag1TextView);
 		tag2 = (TextView) findViewById(R.id.tag2TextView);
@@ -92,7 +99,7 @@ public class ViewMovieInfo extends Activity {
 			int tag2Index = result.getColumnIndex("tag2");
 
 			// fill TextViews with the retrieved data
-			name.setText(result.getString(nameIndex));
+			title.setText(result.getString(nameIndex));
 			mood.setText(result.getString(moodIndex));
 			dateSeen.setText(result.getString(dateSeenIndex));
 			tag1.setText(result.getString(tag1Index));
@@ -127,6 +134,76 @@ public class ViewMovieInfo extends Activity {
 
     public void onNotSeenClick(View view){
         asyncTask().execute(new Object[]{rowID, 3});
+    }
+
+    public void chooseDate(View v){
+        new DatePickerDialog(this, d,
+                date.get(Calendar.YEAR),
+                date.get(Calendar.MONTH),
+                date.get(Calendar.DAY_OF_MONTH))
+                .show();
+    }
+
+    private void updateDate(){
+        dateSeen.setText(DateUtils.formatDateTime(this, date.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE));
+    }
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
+            date.set(Calendar.YEAR, year);
+            date.set(Calendar.MONTH, monthOfYear);
+            date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateDate();
+            saveMovie();
+        }
+    };
+
+    public void saveMovie(){
+
+       if (title.getText().length() != 0) {
+
+            AsyncTask<Object, Object, Object> saveRatingTask =
+                    new AsyncTask<Object, Object, Object>() {
+
+                        @Override
+                        protected Object doInBackground(Object... params) {
+
+                                DatabaseAllMovies databaseAllMovies = new DatabaseAllMovies(ViewMovieInfo.this);
+
+                                databaseAllMovies.updateMovie(rowID,
+                                        title.getText().toString(),
+                                        mood.getText().toString(),
+                                        dateSeen.getText().toString(),
+                                        tag1.getText().toString(),
+                                        tag2.getText().toString());
+
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Object result) {
+//                            finish();
+                        }
+
+                    };
+
+            // save the rating to the database using a separate thread
+            saveRatingTask.execute((Object[]) null);
+
+        }
+        else {
+            // create a new AlertDialog Builder
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(ViewMovieInfo.this);
+
+            // set dialog title & message, and provide Button to dismiss
+            builder.setTitle(R.string.errorTitle);
+            builder.setMessage(R.string.errorMessage);
+            builder.setPositiveButton(R.string.errorButton, null);
+            builder.show();
+        }
+
     }
 
     private final DatabaseSeen databaseSeen = new DatabaseSeen(ViewMovieInfo.this);
@@ -176,14 +253,14 @@ public class ViewMovieInfo extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.editItem:
+		case R.id.sendMovie:
 			// create an Intent to launch the AddEditRating Activity
 			Intent recommendMovie =
 			    new Intent(this, RecommendMovie.class);
 
 			// pass the selected rating's data as extras with the Intent
 			recommendMovie.putExtra("_id", rowID);
-			recommendMovie.putExtra("name", name.getText());
+			recommendMovie.putExtra("name", title.getText());
 			recommendMovie.putExtra("mood", mood.getText());
 			recommendMovie.putExtra("dateSeen", dateSeen.getText());
 			recommendMovie.putExtra("tag1", tag1.getText());
