@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Objects;
-
 public class ViewMovieInfo extends Activity {
 
 	private long rowID; 
