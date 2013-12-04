@@ -10,9 +10,9 @@
         android:id="@+id/screen_main_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/screen_main_menu"
+        android:text="@string/screenTitleMainMenu"
         android:textAllCaps="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
@@ -24,7 +24,7 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_suggest"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"
         android:clickable="true"
         android:onClick="onRecommendClick"
     />
@@ -35,7 +35,7 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_pending"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"
         android:clickable="true"
         android:onClick="onPendingClick"
     />
@@ -46,7 +46,7 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_watched"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"
         android:clickable="true"
         android:onClick="onSeenClick"
     />
@@ -57,7 +57,7 @@
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_all_movies"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"
         android:clickable="true"
         android:onClick="onAllMoviesClick"
     />

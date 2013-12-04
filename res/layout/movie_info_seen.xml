@@ -5,11 +5,12 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/screen_watched"
+        android:id="@+id/screen_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/button_watched"
+        android:textSize="30sp"
+        android:text="@string/screenTitleWatched"
+        android:textAllCaps="true"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/nameLabelTextView"
+                android:id="@+id/titleLabelTextView"
                 style="@style/MovieLabelTextView"
                 android:text="@string/label_movie_title" >
             </TextView>
@@ -72,13 +73,14 @@
             <TextView
                 android:id="@+id/dateSeenLabelTextView"
                 style="@style/MovieLabelTextView"
-                android:text="@string/label_date_seen" >
+                android:text="@string/label_date" >
             </TextView>
 
             <TextView
                 android:id="@+id/dateSeenTextView"
                 android:imeOptions="actionNext"
                 android:inputType="date"
+                android:hint="@string/dateHint"
                 style="@style/MovieTextView"
                 android:onClick="chooseDate" >
             </TextView>

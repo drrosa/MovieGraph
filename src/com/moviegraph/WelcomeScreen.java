@@ -5,12 +5,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -45,12 +46,21 @@ public class WelcomeScreen extends Activity {
 
         email = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        TextView loginButton = (TextView) findViewById(R.id.button_login);
 
-        Button SubmitButton =
-                (Button) findViewById(R.id.login);
-        SubmitButton.setOnClickListener(submitLogin);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/dijkstra.ttf");
+
+        ((TextView) findViewById(R.id.screen_title)).setTypeface(font);
+        ((TextView) findViewById(R.id.button_signup)).setTypeface(font);
+        loginButton.setTypeface(font);
+        email.setTypeface(font);
+        password.setTypeface(font);
+
+        email.setText("drrt");
+        password.setText("asd");
+
+        loginButton.setOnClickListener(submitLogin);
     }
-
 
 
     // responds to event generated when user clicks the Done Button
@@ -131,14 +141,12 @@ public class WelcomeScreen extends Activity {
 
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
-//		 Do something in response to button
 
     }
     public void onLoginClick(){
 
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
-//		 Do something in response to button
 
     }
 

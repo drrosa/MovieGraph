@@ -5,11 +5,12 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/screen_pending"
+        android:id="@+id/screen_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/button_pending"
+        android:textSize="30sp"
+        android:text="@string/screenTitleNotWatched"
+        android:textAllCaps="true"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
@@ -27,9 +28,9 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/nameLabelTextView"
+                android:id="@+id/titleLabelTextView"
                 style="@style/MovieLabelTextView"
-                android:text="@string/title" >
+                android:text="@string/label_movie_title" >
             </TextView>
 
             <TextView
@@ -71,7 +72,7 @@
             <TextView
                 android:id="@+id/dateSeenLabelTextView"
                 style="@style/MovieLabelTextView"
-                android:text="@string/label_date_seen" >
+                android:text="@string/label_date" >
             </TextView>
 
             <TextView

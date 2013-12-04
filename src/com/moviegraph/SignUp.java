@@ -4,13 +4,15 @@ package com.moviegraph;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -46,29 +48,32 @@ public class SignUp extends Activity {
 		email = (EditText) findViewById(R.id.new_email);
 		password = (EditText) findViewById(R.id.password);
 		confirm_password = (EditText) findViewById(R.id.confirm_password);
+        TextView submitSignUp = (TextView) findViewById(R.id.button_submit);
 
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/dijkstra.ttf");
+
+        ((TextView) findViewById(R.id.screen_title)).setTypeface(font);
+        ((TextView) findViewById(R.id.button_cancel)).setTypeface(font);
+        submitSignUp.setTypeface(font);
+        email.setTypeface(font);
+        password.setTypeface(font);
+        confirm_password.setTypeface(font);
 
 
         Bundle extras = getIntent().getExtras();
 
-        // if there are extras, use them to populate the EditTexts
         if (extras != null) {
             rowID = extras.getLong("row_id");
             email.setText(extras.getString("email"));
             password.setText(extras.getString("password"));
 
-        } // end if
+        }
 
-        // set event listener for the Save Rating Button
-		Button SubmitButton =
-				(Button) findViewById(R.id.accept);
-		SubmitButton.setOnClickListener(submitSignup);
+		submitSignUp.setOnClickListener(this.submitSignup);
 	}
 
 
-
-
-    // responds to event generated when user clicks the Done Button
     OnClickListener submitSignup = new OnClickListener() {
         @Override
         public void onClick(View v) {

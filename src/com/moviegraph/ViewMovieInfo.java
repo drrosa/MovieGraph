@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -48,12 +49,21 @@ public class ViewMovieInfo extends Activity {
             break;
         }
 
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/dijkstra.ttf");
+        ((TextView) findViewById(R.id.screen_title)).setTypeface(font);
+        ((TextView) findViewById(R.id.titleLabelTextView)).setTypeface(font);
+        ((TextView) findViewById(R.id.moodLabelTextView)).setTypeface(font);
+        ((TextView) findViewById(R.id.dateSeenLabelTextView)).setTypeface(font);
 
-		title = (TextView) findViewById(R.id.nameTextView);
+        title = (TextView) findViewById(R.id.nameTextView);
 		mood = (TextView) findViewById(R.id.moodTextView);
 		dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
 		tag1 = (TextView) findViewById(R.id.tag1TextView);
 		tag2 = (TextView) findViewById(R.id.tag2TextView);
+
+        title.setTypeface(font);
+        mood.setTypeface(font);
+        dateSeen.setTypeface(font);
 	}
 
 

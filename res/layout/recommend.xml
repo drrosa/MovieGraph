@@ -6,11 +6,11 @@
         >
 
     <TextView
-        android:id="@+id/screen_suggest"
+        android:id="@+id/screen_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/button_suggest"
+        android:textSize="30sp"
+        android:text="@string/screenTitleSuggest"
         android:textAllCaps="true"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
@@ -19,7 +19,7 @@
 
         <EditText
             android:id="@+id/toEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/label_send_to"
@@ -30,7 +30,7 @@
 
         <EditText
             android:id="@+id/titleEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/title"
@@ -74,14 +74,19 @@
 
         <TextView
             android:id="@+id/moodTextView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone" >
+            android:textSize="25sp"
+            android:hint="Mood"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            >
         </TextView>
 
         <Spinner android:id="@+id/spinner"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
         />
 
         <TextView
@@ -90,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="@string/label_date_seen"
+            android:hint="@string/label_date"
             android:imeOptions="actionNext"
             android:inputType="date"
             style="@style/MovieTextView"
@@ -121,11 +126,10 @@
             android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="@string/button_send"
-            android:onClick="saveRatingButtonClicked"
-            android:textSize="30sp" >
+            android:textSize="35sp" >
         </TextView>
 
 </LinearLayout>

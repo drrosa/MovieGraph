@@ -27,8 +27,9 @@ public class RecommendMovie extends Activity
     private EditText tag1;
     private EditText tag2;
     private int buttonID;
+    private Bundle extras;
 
-    private static final String[] moodList ={"Select Mood", "Clever", "Tense", "Witty", "Exciting", "Serious", "Gloomy"};
+    private static final String[] moodList ={"", "Clever", "Tense", "Witty", "Exciting", "Serious", "Gloomy"};
 
 
 //    TODO: BUTTONID constants
@@ -50,9 +51,8 @@ public class RecommendMovie extends Activity
 
         TextView sendButton = (TextView) findViewById(R.id.send);
 
-        Bundle extras = getIntent().getExtras();
+        extras = getIntent().getExtras();
 
-        // if there are extras, use them to populate the EditTexts
         if (extras != null) {
             rowID = extras.getLong("_id");
             title.setText(extras.getString("name"));
@@ -60,28 +60,29 @@ public class RecommendMovie extends Activity
             mood.setText(extras.getString("mood"));
             tag1.setText(extras.getString("tag1"));
             tag2.setText(extras.getString("tag2"));
-        } // end if
+        }
 
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/dijkstra.ttf");
-        ((TextView) findViewById(R.id.screen_suggest)).setTypeface(font);
+        ((TextView) findViewById(R.id.screen_title)).setTypeface(font);
         to.setTypeface(font);
         title.setTypeface(font);
+        mood.setTypeface(font);
         sendButton.setTypeface(font);
 
-        sendButton.setOnClickListener(saveRatingButtonClicked);
+        sendButton.setOnClickListener(sendMovieButton);
 
         Spinner spin = (Spinner)findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);
 
-        ArrayAdapter<String> moodDropdownList = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, moodList);
+        ArrayAdapter<String> moodDropdownList = new ArrayAdapter<String>(
+                this, R.layout.spinner_mood_item, moodList );
         moodDropdownList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(moodDropdownList);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-        mood.setText(moodList[position]);
+            mood.setText(moodList[position]);
     }
 
     @Override
@@ -90,7 +91,7 @@ public class RecommendMovie extends Activity
     }
 
     // responds to event generated when user clicks the Done Button
-    OnClickListener saveRatingButtonClicked = new OnClickListener() {
+    OnClickListener sendMovieButton = new OnClickListener() {
         @Override
         public void onClick(View v) {
             if (title.getText().length() != 0) {
