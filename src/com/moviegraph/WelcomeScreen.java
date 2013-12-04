@@ -56,7 +56,7 @@ public class WelcomeScreen extends Activity {
         email.setTypeface(font);
         password.setTypeface(font);
 
-        email.setText("drrt");
+        email.setText("DrrT");
         password.setText("asd");
 
         loginButton.setOnClickListener(submitLogin);

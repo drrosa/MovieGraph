@@ -29,7 +29,8 @@ public class RecommendMovie extends Activity
     private int buttonID;
     private Bundle extras;
 
-    private static final String[] moodList ={"", "Clever", "Tense", "Witty", "Exciting", "Serious", "Gloomy"};
+    private static final String[] moodList ={"", "Clever", "Tense", "Witty", "Exciting",
+                                            "Serious", "Gloomy", "Bittersweet", "Humorous"};
 
 
 //    TODO: BUTTONID constants
