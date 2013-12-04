@@ -10,47 +10,56 @@
         android:id="@+id/screen_main_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/screen_main_menu"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
         />
 
-    <Button
-        android:id="@+id/recommend"
-        android:layout_width="195dp"
+    <TextView
+        android:id="@+id/button_suggest"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_suggest"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="true"
         android:onClick="onRecommendClick"
     />
 
-    <Button
-        android:id="@+id/pending"
-        android:layout_width="195dp"
+    <TextView
+        android:id="@+id/button_pending"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_pending"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="true"
         android:onClick="onPendingClick"
     />
 
-    <Button
-        android:id="@+id/already_watched"
-        android:layout_width="195dp"
+    <TextView
+        android:id="@+id/button_watched"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:text="@string/button_watched"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="true"
         android:onClick="onSeenClick"
     />
 
-    <Button
-            android:id="@+id/all_movies"
-            android:layout_width="195dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:text="@string/button_all_movies"
-            android:onClick="onAllMoviesClick"
-            />
+    <TextView
+        android:id="@+id/button_all_movies"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:text="@string/button_all_movies"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:clickable="true"
+        android:onClick="onAllMoviesClick"
+    />
 
 </LinearLayout>

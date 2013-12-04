@@ -44,7 +44,7 @@ public class Movies extends ListActivity {
 				R.layout.movie_list_item, null,
 				from, to, 0);
 
-		setListAdapter(ratingAdapter); 
+		setListAdapter(ratingAdapter);
 	}
 
 	@Override
@@ -120,9 +120,11 @@ public class Movies extends ListActivity {
         Intent screen =new Intent();
 		// create a new Intent to launch
        if(item.getItemId()==R.id.LogoutItem){
-           screen = new Intent(this, WelcomeScreen.class);
+           screen =
+new Intent(this, WelcomeScreen.class);
        }else {
-            screen = new Intent(this, RecommendMovie.class);
+            screen =
+                   new Intent(this, RecommendMovie.class);
        }
 
 		startActivity(screen);

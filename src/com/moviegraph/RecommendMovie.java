@@ -2,13 +2,13 @@ package com.moviegraph;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +20,7 @@ public class RecommendMovie extends Activity
 
     private long rowID;
 
+    private EditText to;
     private EditText title;
     private TextView mood;
     private TextView dateSeen;
@@ -27,7 +28,7 @@ public class RecommendMovie extends Activity
     private EditText tag2;
     private int buttonID;
 
-    private static final String[] moodList ={"Select Mood", "lorem", "ipsum", "dolor"};
+    private static final String[] moodList ={"Select Mood", "Clever", "Tense", "Witty", "Exciting", "Serious", "Gloomy"};
 
 
 //    TODO: BUTTONID constants
@@ -40,11 +41,14 @@ public class RecommendMovie extends Activity
 //        SharedPreferences prefs = this.getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
 //        String email = prefs.getString("email", null);
 
+        to = (EditText) findViewById(R.id.toEditText);
         title = (EditText) findViewById(R.id.titleEditText);
         mood = (TextView) findViewById(R.id.moodTextView);
         dateSeen = (TextView) findViewById(R.id.dateSeenTextView);
         tag1 = (EditText) findViewById(R.id.tag1EditText);
         tag2 = (EditText) findViewById(R.id.tag2EditText);
+
+        TextView sendButton = (TextView) findViewById(R.id.send);
 
         Bundle extras = getIntent().getExtras();
 
@@ -58,9 +62,12 @@ public class RecommendMovie extends Activity
             tag2.setText(extras.getString("tag2"));
         } // end if
 
-        // set event listener for the Save Rating Button
-        Button sendButton =
-                (Button) findViewById(R.id.send);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/dijkstra.ttf");
+        ((TextView) findViewById(R.id.screen_suggest)).setTypeface(font);
+        to.setTypeface(font);
+        title.setTypeface(font);
+        sendButton.setTypeface(font);
+
         sendButton.setOnClickListener(saveRatingButtonClicked);
 
         Spinner spin = (Spinner)findViewById(R.id.spinner);

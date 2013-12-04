@@ -5,25 +5,38 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.TextView;
 
 public class MainMenu extends Activity {
 
     //    TODO: LISTID constants
     SharedPreferences prefs;
-	@Override
+
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         prefs = this.getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
 //        String email = prefs.getString("email", null);
 //        Log.d("Session", "SharedPreferences exist, email= "+ email);
 		setContentView(R.layout.main_menu);
+
+        final View [] mainMenu = {
+                findViewById(R.id.screen_main_menu),
+                findViewById(R.id.button_suggest),
+                findViewById(R.id.button_pending),
+                findViewById(R.id.button_watched),
+                findViewById(R.id.button_all_movies) };
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/dijkstra.ttf");
+        for(View menuButton : mainMenu)
+            ((TextView)menuButton).setTypeface(font);
 	}
 
     public void onRecommendClick(View view){

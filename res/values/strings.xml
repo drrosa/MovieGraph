@@ -23,7 +23,7 @@
     <string name="button_signup">Sign Up</string>
     <string name="button_accept">Accept</string>
     <string name="button_delete">Delete</string>
-    <string name="button_send">Send</string>
+    <string name="button_send">Send!</string>
     <string name="button_save">Save</string>
     <string name="button_must_see">Must See</string>
     <string name="button_recommended">Recommended</string>
