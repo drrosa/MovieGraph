@@ -44,6 +44,9 @@
 
 
     <string name="menuitem_LogoutItem">Logout</string>
+
+
+
     <string name="errorConfirmation">Confirmation does not match password</string>
     <string name="errorMessage_password_confirmation">Your password and password confirmation must match</string>
 
@@ -53,19 +56,5 @@
     <string name="title">Title</string>
     <string name="new_email">New e-mail</string>
     <string name="todo">TODO</string>
-
-
-
-    <string-array name="countries_array">
-        <item>Afghanistan</item>
-        <item>Albania</item>
-        <item>Algeria</item>
-        <item>American Samoa</item>
-        <item>Andorra</item>
-        <item>Angola</item>
-        <item>Anguilla</item>
-        <item>Antarctica</item>
-    </string-array>
-
 
 </resources>

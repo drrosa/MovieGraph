@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -40,46 +41,10 @@ public class WelcomeScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
 
-
-
-
-            Class<?> activityClass;
-
-                try {
-                    SharedPreferences prefs = getSharedPreferences("myPreferences", MODE_PRIVATE);
-                    activityClass = Class.forName(
-                            prefs.getString("lastActivity", WelcomeScreen.class.getName()));
-                    Log.d("Session", "last activity = "+ activityClass);
-                } catch(ClassNotFoundException ex) {
-                    activityClass = WelcomeScreen.class;
-                }
-
-
-            if(savedInstanceState != null){
-                //        Log.d("Session", "saved instance = "+ savedInstanceState.getString("email"));
-
-
-                startActivity(new Intent(this, activityClass));
-            }
-
-
-
-
-
-
-
-
-
         prefs = getSharedPreferences("myPreferences", MODE_PRIVATE);
 
         email = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-
-
-        //Temp for testing assign values to email and password
-
-        email.setText("Norman@");
-        password.setText("0");
 
         Button SubmitButton =
                 (Button) findViewById(R.id.login);
